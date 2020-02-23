@@ -6,17 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap" rel="stylesheet">
+
     <title>gifOS</title>
 </head>
 
 <body>
     <header>
-        <div class="top-header">¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.////// Número de visitas: 12.765.803</div>
-        <div class="menu">
-            <img src='./assets/images/gifOF_logo.png' alt='gifOS logo'>
-            <button>Crear GuifOS</button>
-            <button>Elegir tema</button>
-            <button>Mis Guifos</button>
+        <div class="top-header">
+            <span class='top-header-text'>¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.
+                ////// Número de visitas: 12.765.803</span>
+        </div>
+        <div class='menu'>
+            <div class='logo-container'>
+                <img src='./assets/images/gifOF_logo.png' alt='gifOS logo'>
+            </div>
+            <div class='navigation-bar'>
+                <button class='btn'>Crear GuifOS</button>
+                <div class='menu-select-theme'>
+                    <button class='btn choose-theme'>Elegir tema</button>
+                    <button class='btn dropdown'>v</button>
+                </div>
+                <span class='text-misGuifos'><span class=text-underlined-misGuifos>M</span>is Guifos</span>
+            </div>
         </div>
     </header>
     <input class='search-bar' placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
