@@ -13,11 +13,12 @@
 
 <body>
     <header>
+        <!-- Menu-navigation-bar -->
         <div class="top-header">
             <span class='top-header-text'>¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.
                 ////// Número de visitas: 12.765.803</span>
         </div>
-        <div class='menu'>
+        <div class='menu-navigation-bar'>
             <div class='logo-container'>
                 <img src='./assets/images/gifOF_logo.png' alt='gifOS logo'>
             </div>
@@ -31,38 +32,61 @@
             </div>
         </div>
     </header>
-    <input class='search-bar' placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
-    <button>Buscar</button>
-
-    <section>
-        <input placeholder="Hoy te sugerimos...">
-        <div class='list-gifs'>
-            <div class='gif'>
-                <span>#Johnatanvaness</span>
-                <img> Image 1</img>
+    <!-- Menu-search-bar -->
+    <section class='menu-search-bar'>
+        <div>
+            <div class='text search'>Buscar</div>
+            <div class='search-bar-container'>
+                <input class='search-bar'
+                    id='search-bar' 
+                    placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
+                <button class='btn search' id='btn-search'>
+                    <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
+                    <span>Buscar</span>
+                </button>
             </div>
-            <div class='gif'>
-                <span>#SailorMercury</span>
-                <img> Image 2</img>
-            </div class='gif'>
-            <div class='gif'>
-                <span>#FabFive</span>
-                <img> Image 3</img>
-            </div class='gif'>
-            <div class='gif'>
-                <span>#UnicornsRainbow</span>
-                <img> Image 4</img>
-            </div class='gif'>
-
         </div>
     </section>
-    <section>
-        <input placeholder="Tendencias">
-        <div>
-            <img> Image 1</img>
-            <img> Image 1</img>
-            <img> Image 1</img>
-            <img> Image 1</img>
+    <!-- Suggested Guifos 1 -->
+    <section class='suggested-guifos-container'>
+        <div class='text-suggested-gif'>Hoy te sugerimos:</div>
+        <div class='list-suggested-gifs'>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
         </div>
     </section>
     <script type="text/javascript" src="javascript.js"></script>

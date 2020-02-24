@@ -1,2 +1,7 @@
-let mivariable = 'HOLA MUNDO';
-console.log(mivariable)
+let btnSearch = document.getElementById("btn-search");
+
+function getStringIput () {
+    return document.getElementById("search-bar").value;
+}
+
+getStringIput();
