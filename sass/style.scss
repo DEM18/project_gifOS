@@ -105,7 +105,6 @@ $borderBtn:  1px solid #110038;
     background: #E6E6E6;
     box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
     height: 99px;
-    width: 1200px;
     margin: 0 91px;
     padding: 1px 1px;
     margin-bottom: 64px;
@@ -121,26 +120,31 @@ $borderBtn:  1px solid #110038;
     margin-bottom: 12px;
 }
 
+.search-bar-container {
+    display: flex;
+    align-items: center;
+}
+
 .search-bar {
-    width: 1057px;
     height: 48px;
     margin-left: 15px;
     background: $colorWhite;
     border: 1px solid #979797;
     box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
     padding: 13px 16px;
+    width: 100%;
 }
 
 .btn.search {
     width: 102px;
     height: 36px;
     margin-left: 8px;
+    margin-right: 18px;
     font-size: 16px;
     color: #B4B4B4;
     letter-spacing: 0;
     line-height: 18px;
     padding-left:10px;
-    padding-right: 18px;
     padding-top: 9px;
     padding-bottom: 9px;
     font-family: $fontFamilyChakraPetch;
@@ -154,9 +158,12 @@ $borderBtn:  1px solid #110038;
 
 /*---Suggested guifos----*/
 
+.suggested-guifos-container {
+    margin: 0 91px;
+}
+
 .text-suggested-gif {
     color: #110038;
-    width: 1200px;
     height: 32px;
     background: #FFFAFE;
     border: 1px solid #E6BBE2;
@@ -168,24 +175,21 @@ $borderBtn:  1px solid #110038;
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightRegular;
     font-size: 14px;
-    margin:0 91px;
+    // margin:0 91px;
 }
 
 .list-suggested-gifs {
-    display: grid;
-    grid-template-columns: 288px 288px 288px 288px;
-    grid-column-gap: 16px;
-    margin: 16px 91px 0px;
+    background-color: gold;
+    display: flex;
+    margin-top: 16px;
 }
 
 .gif-container {
-/*     width: 288px;
-    height: 313px; */
     background: #E6E6E6;
     box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
     padding: 4px 4px;
- /*    margin-right: 16px; */
     margin-bottom: 64px;
+    margin-right: 16px;
 }
 
 .hashtag-gif-name {
@@ -200,12 +204,10 @@ $borderBtn:  1px solid #110038;
     margin-bottom: 2px;
     padding: 3px 3px;
     position: relative;
-    width: 280px;
     z-index: 0; 
 } 
 
 .gif-image-container {
-    width: 280px;
     margin-top: 3px;
     height: 280px;
     position: relative;
@@ -213,7 +215,6 @@ $borderBtn:  1px solid #110038;
 }
 
 .gif-image {
-    width: 100%;
     height: 100%;
 }
 
