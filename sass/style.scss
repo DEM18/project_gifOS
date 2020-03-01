@@ -6,8 +6,8 @@ $fontFamilyChakraPetch: 'Chakra Petch';
 
 /*----font-weight----*/
 
-$fontWeightRegular: 400;
-$fontWeightChakraPetch-Bold: 700;
+$fontWeightChakraPetchBold: 700;
+$fontWeightChakraPetchRegular: 400;
 
 /*---colors---*/
 
@@ -16,11 +16,20 @@ $colorWhite: #FFFFFF;
 
 /*---background-colors---*/
 
-$backgroundColorMenuBtn:  #F7C9F3;
-$backgroundColorTopHeader: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
-$borderBtn:  1px solid #110038;
+$theme1BtnBorder:  1px solid #110038;
+$theme1BtnDropdownThemeOptionBorder:  1px solid #CCA6C9;
+$theme1BtnHoverBackground: #E6BBE2;
+$theme1BtnNormalBackground:  #F7C9F3;
+$theme1BtnDropdownBackground: #E6E6E6;
+$theme1BtnDropdownThemeOptionBackground: #FFF4FD;
+$theme1BackgroundImage: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
 
+/*----Box shadows----*/
 
+$theme1BtnBoxShadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+$theme1BtnDropdownBoxShadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+$theme1BtnDropdownThemeOptionBoxShadow: inset -1px -1px 0 0 #E6DCE4, inset 1px 1px 0 0 #FFFFFF;
+/*/// VARIABLES ///*/
 
 * {
     border: 0;
@@ -30,14 +39,14 @@ $borderBtn:  1px solid #110038;
 /*----top-header----*/
 
 .top-header {
-    background-image: $backgroundColorTopHeader;
+    background-image: $theme1BackgroundImage;
     box-shadow: 0 1px 0 0 #110038;
 }
 
 .top-header-text {
     color: $colorWhite;
     font-family: $fontFamilyChakraPetch;
-    font-weight: $fontWeightRegular;
+    font-weight: $fontWeightChakraPetchRegular;
     font-size: 12px;
     letter-spacing: 0;  
     padding: 4px 3px 7px;
@@ -66,12 +75,13 @@ $borderBtn:  1px solid #110038;
 }
 
 .btn {
-    background-color: $backgroundColorMenuBtn;
-    border: $borderBtn;
+    background-color: $theme1BtnNormalBackground;
+    border: $theme1BtnBorder;
     box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
     color: $colorBlack;
+    cursor: pointer;
     font-family: $fontFamilyChakraPetch;
-    font-weight: $fontWeightRegular;
+    font-weight: $fontWeightChakraPetchRegular;
     font-size: 16px;
     height: 36px;
     letter-spacing: 0;
@@ -79,6 +89,13 @@ $borderBtn:  1px solid #110038;
     text-align: center;
     width: 144px;
 }
+
+
+.btn:hover,
+.btn:active {
+    background: $theme1BtnHoverBackground;
+}
+
 
 .btn.dropdown{
     width: 36px;
@@ -89,13 +106,74 @@ $borderBtn:  1px solid #110038;
     display: flex;
     margin: 0 16px; 
     width: 167px;
+    position: relative;
 }
 
-.text-misGuifos {
+.btn-dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 167px;
+    top: 36px;
+    z-index: 1;
+    background: $theme1BtnDropdownBackground;
+    box-shadow: $theme1BtnDropdownBoxShadow;
+    padding: 10px 10px 10px 10px;
+}
+
+.show {
+    display: block;
+}
+
+.theme-option {
+    background: $theme1BtnDropdownThemeOptionBackground;
+    border: $theme1BtnDropdownThemeOptionBorder;
+    box-shadow: $theme1BtnDropdownThemeOptionBoxShadow;
     font-family: $fontFamilyChakraPetch;
+    font-size: 16px;
+    height: 36px;
+    color: #110038;
+    letter-spacing: 0;
+    line-height: 22px;
+    width: 150px;
+    padding-left: 16px;
+    text-align: left;
+    cursor: pointer;
 }
 
-.text-underlined-misGuifos {
+
+.theme-option.sailor-night {
+    background: #F0F0F0;
+    border: 1px solid #808080;
+    box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+}
+
+.btn.text-misGuifos {
+    font-family: $fontFamilyChakraPetch;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    color: $colorBlack;
+    cursor: pointer;
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchRegular;
+    font-size: 16px;
+    height: 32px;
+    letter-spacing: 0;
+    line-height: 18px;
+    width: 95px;
+}
+
+.btn.text-misGuifos:hover {
+    border: 1px dotted; 
+}
+
+.btn.text-misGuifos:active {
+    color: #110038;
+}
+
+.text-underlined {
     text-decoration: underline;
 }
 
@@ -112,11 +190,11 @@ $borderBtn:  1px solid #110038;
 
 .text.search {
     padding: 3px 3px;
-    background-image: $backgroundColorTopHeader;
+    background-image: $theme1BackgroundImage;
     color: $colorWhite;
     font-size: 14px;
     letter-spacing: 0;
-    font-weight: $fontWeightChakraPetch-Bold;
+    font-weight: $fontWeightChakraPetchBold;
     margin-bottom: 12px;
 }
 
@@ -148,7 +226,7 @@ $borderBtn:  1px solid #110038;
     padding-top: 9px;
     padding-bottom: 9px;
     font-family: $fontFamilyChakraPetch;
-    font-weight: $fontWeightRegular; 
+    font-weight: $fontWeightChakraPetchRegular; 
 }
 
 .magnifying-glass-icon{
@@ -160,45 +238,54 @@ $borderBtn:  1px solid #110038;
 
 .suggested-guifos-container {
     margin: 0 91px;
+
 }
 
-.text-suggested-gif {
+.title-list-gif {
     color: #110038;
     height: 32px;
     background: #FFFAFE;
     border: 1px solid #E6BBE2;
     box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
     letter-spacing: 0;
+    margin-bottom: 16px;
     padding-left: 7px;
     padding-top: 7px;
     padding-bottom: 7px;
     font-family: $fontFamilyChakraPetch;
-    font-weight: $fontWeightRegular;
+    font-weight: $fontWeightChakraPetchRegular;
     font-size: 14px;
-    // margin:0 91px;
 }
 
-.list-suggested-gifs {
-    background-color: gold;
+.list-gifs {
     display: flex;
-    margin-top: 16px;
+    justify-content: space-between;
+    height: 313px;
+    margin-bottom: 64px;
 }
 
-.gif-container {
+.gif-container.bordered {
     background: #E6E6E6;
     box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
-    padding: 4px 4px;
-    margin-bottom: 64px;
-    margin-right: 16px;
+    margin-right: 8px;
+    margin-left: 8px;
+    padding: 4px;
 }
 
-.hashtag-gif-name {
+.gif-container:first-child {
+    margin-left: 0px;
+}
+
+.gif-container:last-child {
+    margin-right: 0px;
+}
+ .hashtag-gif-name {
     align-items: center;
-    background-image: $backgroundColorTopHeader;
+    background-image: $theme1BackgroundImage;
     color: $colorWhite;
     display: flex;
     font-size: 14px;
-    font-weight: $fontWeightChakraPetch-Bold;
+    font-weight: $fontWeightChakraPetchBold;
     height: 24px;
     letter-spacing: 0;
     margin-bottom: 2px;
@@ -208,16 +295,16 @@ $borderBtn:  1px solid #110038;
 } 
 
 .gif-image-container {
-    margin-top: 3px;
     height: 280px;
     position: relative;
     z-index: 0;
 }
 
 .gif-image {
+    width: 280px;
     height: 100%;
 }
-
+ 
 .btn-close {
     width: 16px;
     height: 14px;
@@ -236,7 +323,7 @@ $borderBtn:  1px solid #110038;
     border: 1px solid #4C2F99;
     box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
     font-family: $fontFamilyChakraPetch;
-    font-weight: $fontWeightRegular;
+    font-weight: $fontWeightChakraPetchRegular;
     font-size: 14px;
     color: #FFFFFF;
     letter-spacing: 0;

@@ -24,11 +24,20 @@
             </div>
             <div class='navigation-bar'>
                 <button class='btn'>Crear GuifOS</button>
-                <div class='menu-select-theme'>
+                <nav class='menu-select-theme' onclick="toggleDropdown()">
                     <button class='btn choose-theme'>Elegir tema</button>
-                    <button class='btn dropdown'>v</button>
-                </div>
-                <span class='text-misGuifos'><span class=text-underlined-misGuifos>M</span>is Guifos</span>
+                    <button class='btn dropdown'>
+                        <img src='./assets/icons/dropdown.svg'>
+                    </button>
+                    <div id='btn-dropdown' class='btn-dropdown-content'>
+                        <button class='theme-option sailor-day'><span class='text-underlined'>S</span>ailor Day</button>
+                        <button class='theme-option sailor-night'>Sailor Night</button>
+                    </div>
+                </nav>
+                <buttton class='btn text-misGuifos'>
+                    <span class='text-underlined'>M</span>
+                    is Guifos
+                </buttton>
             </div>
         </div>
     </header>
@@ -37,8 +46,7 @@
         <div>
             <div class='text search'>Buscar</div>
             <div class='search-bar-container'>
-                <input class='search-bar'
-                    id='search-bar' 
+                <input class='search-bar' id='search-bar'
                     placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
                 <button class='btn search' id='btn-search'>
                     <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
@@ -49,9 +57,9 @@
     </section>
     <!-- Suggested Guifos 1 -->
     <section class='suggested-guifos-container'>
-        <div class='text-suggested-gif'>Hoy te sugerimos:</div>
-        <div class='list-suggested-gifs'>
-            <div class='gif-container'>
+        <div class='title-list-gif'>Hoy te sugerimos:</div>
+        <div class='list-gifs'>
+            <div class='gif-container bordered'>
                 <div class='hashtag-gif-name'>#Jonathanvanness
                     <img class='btn-close' src='./assets/icons/button3.svg'>
                 </div>
@@ -60,7 +68,7 @@
                     <button class='btn-see-more'>Ver más…</button>
                 </div>
             </div>
-            <div class='gif-container'>
+            <div class='gif-container bordered'>
                 <div class='hashtag-gif-name'>#Jonathanvanness
                     <img class='btn-close' src='./assets/icons/button3.svg'>
                 </div>
@@ -69,7 +77,7 @@
                     <button class='btn-see-more'>Ver más…</button>
                 </div>
             </div>
-            <div class='gif-container'>
+            <div class='gif-container bordered'>
                 <div class='hashtag-gif-name'>#Jonathanvanness
                     <img class='btn-close' src='./assets/icons/button3.svg'>
                 </div>
@@ -78,12 +86,69 @@
                     <button class='btn-see-more'>Ver más…</button>
                 </div>
             </div>
-            <div class='gif-container'>
+            <div class='gif-container bordered'>
                 <div class='hashtag-gif-name'>#Jonathanvanness
                     <img class='btn-close' src='./assets/icons/button3.svg'>
                 </div>
                 <div class='gif-image-container'>
                     <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container bordered'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/gify.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+        </div>
+        <div class='title-list-gif'>Tendencias:</div>
+        <div class='list-gifs'>
+            <div class='gif-container bordered'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/sonic.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/sonic.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/sonic.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/sonic.png'>
+                    <button class='btn-see-more'>Ver más…</button>
+                </div>
+            </div>
+            <div class='gif-container'>
+                <div class='hashtag-gif-name'>#Jonathanvanness
+                    <img class='btn-close' src='./assets/icons/button3.svg'>
+                </div>
+                <div class='gif-image-container'>
+                    <img class='gif-image' src='./assets/images/sonic.png'>
                     <button class='btn-see-more'>Ver más…</button>
                 </div>
             </div>

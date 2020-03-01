@@ -1,7 +1,3 @@
-let btnSearch = document.getElementById("btn-search");
-
-function getStringIput () {
-    return document.getElementById("search-bar").value;
+function toggleDropdown () {
+    document.getElementById("btn-dropdown").classList.toggle("show");
 }
-
-getStringIput();
