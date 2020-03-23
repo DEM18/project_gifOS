@@ -10,6 +10,9 @@
   box-sizing: border-box;
   margin: 0; }
 
+body {
+  background-color: #FFF4FD; }
+
 /*----top-header----*/
 .top-header {
   background-image: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
@@ -79,6 +82,42 @@
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
   padding: 10px 10px 10px 10px; }
+
+/*-------search-bar-section------------*/
+.search-bar-results-content {
+  display: none;
+  position: absolute;
+  top: 260px;
+  width: 1402px;
+  z-index: 1;
+  background: #E6E6E6;
+  box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+  padding: 10px 10px 10px 10px; }
+
+.results-container {
+  display: flex;
+  justify-content: start;
+  flex-direction: column; }
+
+.result {
+  width: 1055px;
+  text-align: start;
+  font-family: "Chakra Petch";
+  font-weight: 400;
+  font-size: 16px;
+  color: #110038;
+  letter-spacing: 0;
+  line-height: 22px;
+  background: #F0F0F0;
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 16px;
+  margin-bottom: 16px; }
+
+.result-first {
+  border: 1px solid #110038; }
 
 .show {
   display: block; }
@@ -183,23 +222,26 @@
 .suggested-guifos-container {
   margin: 0 91px; }
 
-.title-list-gif {
+.title {
   color: #110038;
-  height: 32px;
   background: #FFFAFE;
+  height: 32px;
   border: 1px solid #E6BBE2;
   box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
   letter-spacing: 0;
-  margin-bottom: 16px;
-  padding-left: 7px;
-  padding-top: 7px;
-  padding-bottom: 7px;
   font-family: "Chakra Petch";
   font-weight: 400;
-  font-size: 14px; }
+  font-size: 14px;
+  padding-left: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px; }
+
+.title.list-gif {
+  margin-bottom: 16px; }
 
 .list-gifs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   height: 313px;
   margin-bottom: 64px; }
@@ -209,6 +251,7 @@
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
   margin-right: 8px;
   margin-left: 8px;
+  margin-bottom: 16px;
   padding: 4px; }
 
 .gif-container:first-child {
@@ -267,5 +310,10 @@
   height: 34px;
   margin-bottom: 15px;
   margin-left: 7px; }
+
+/*----------Trend guifos section------------*/
+.trend-guifos-container {
+  margin-left: 91px;
+  margin-right: 91px; }
 
 /*# sourceMappingURL=style.css.map */

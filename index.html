@@ -29,9 +29,15 @@
                     <button class='btn dropdown'>
                         <img src='./assets/icons/dropdown.svg'>
                     </button>
-                    <div id='btn-dropdown' class='btn-dropdown-content'>
-                        <button class='theme-option sailor-day'><span class='text-underlined'>S</span>ailor Day</button>
-                        <button class='theme-option sailor-night'>Sailor Night</button>
+                    <div id="btn-dropdown" class="btn-dropdown-content">
+                        <button class='theme-option sailor-day'
+                            id='btn-change-theme-day'
+                            onclick="changeThemeDay()">
+                            <span class='text-underlined'>S</span>ailor Day</button>
+                        <button class='theme-option sailor-night' 
+                            id='btn-change-theme-sailor'
+                            onclick="changeThemeSailorNight()"
+                        >Sailor Night</button>
                     </div>
                 </nav>
                 <buttton class='btn text-misGuifos'>
@@ -43,21 +49,26 @@
     </header>
     <!-- Menu-search-bar -->
     <section class='menu-search-bar'>
-        <div>
             <div class='text search'>Buscar</div>
             <div class='search-bar-container'>
                 <input class='search-bar' id='search-bar'
                     placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
-                <button class='btn search' id='btn-search'>
+                <button class="btn search" onclick="showSearchGifResults()">
                     <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
                     <span>Buscar</span>
                 </button>
             </div>
-        </div>
+            <div class="search-bar-results-content" id="btn-search">
+                <div class="results-container">
+                    <button class="result first">Resultado de búsqueda sugerido</button>
+                    <button class="result">Un resultado similar de búsqueda</button>
+                    <button class="result">Y otro más</button>
+            </div>
+            </div>
     </section>
     <!-- Suggested Guifos 1 -->
     <section class="suggested-guifos-container">
-        <div class="title-list-gif">Hoy te sugerimos:</div>
+        <div class="title list-gif">Hoy te sugerimos:</div>
         <div class="list-gifs" id="list-suggested-gifs">
             <!-- <div class="gif-container bordered">
                 <span class='hashtag-gif-name' id="gif-name">#Jonathanvanness</span>
@@ -67,6 +78,10 @@
                 </div>
             </div> -->
         </div>
+    </section>
+    <section class="trend-guifos-container">
+        <div class="title list-gif">Tendencias:</div>
+        <div class="list-gifs" id="list-trend-gifs">
     </section>
     <script type="text/javascript" src="javascript.js"></script>
 </body>
