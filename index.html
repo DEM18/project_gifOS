@@ -53,21 +53,17 @@
             <div class='search-bar-container'>
                 <input class='search-bar' id='search-bar'
                     placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
-                <button class="btn search" onclick="showSearchGifResults()">
+                <button class="btn search" onclick="searchGif()">
                     <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
                     <span>Buscar</span>
                 </button>
             </div>
             <div class="search-bar-results-content" id="btn-search">
-                <div class="results-container">
-                    <button class="result first">Resultado de búsqueda sugerido</button>
-                    <button class="result">Un resultado similar de búsqueda</button>
-                    <button class="result">Y otro más</button>
-            </div>
+                <div class="results-container" id ="gif-results"></div>
             </div>
     </section>
     <!-- Suggested Guifos 1 -->
-    <section class="suggested-guifos-container">
+    <section class="suggested-guifos-container" id="suggestedGifSection">
         <div class="title list-gif">Hoy te sugerimos:</div>
         <div class="list-gifs" id="list-suggested-gifs">
             <!-- <div class="gif-container bordered">
@@ -79,6 +75,7 @@
             </div> -->
         </div>
     </section>
+    <!-- trending Guifos 1 -->
     <section class="trend-guifos-container">
         <div class="title list-gif">Tendencias:</div>
         <div class="list-gifs" id="list-trend-gifs">
