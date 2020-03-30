@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top-header">
+        <span class='top-header-text'>¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.
+            ////// Número de visitas: 12.765.803</span>
+    </div>
+    <div class='menu-navigation-bar'> 
+        <div class='logo-container myGifos'>
+            <button class="btn-back"
+                onclick="parent.location='index.html'"
+                >
+                <img src="./assets/icons/arrow.svg">
+            </button class="btn-back">
+        <img class="logo" src='./assets/images/gifOF_logo.png' alt='gifOS logo'>
+        </div>
+    </div>
+    <div class="crateGif-modal" id="createGifModal">
+        <div class="first-step-title">
+            Crear guifos
+        </div>
+        <div class="createGif-subtitle">
+            <img src="./assets/images/window img.png">
+            <span class="subtitle">Aquí podrás crear tus propios guifos</span>
+        </div>
+        <p class="createGif-description">
+            <span class="text-description">Crear tu guifo es muy fácil, graba cualquier imagen con tu cámara y obtén guifos personalizados. Los pasos para crear tu guifo son:</span>
+            <span class="text-description">1) Dar permisos de acceso a la cámara (sólo por el tiempo de uso)</span class="text-description">
+            <span class="text-description">2) Capturar tu momento guifo</span class="text-description">
+            <span class="text-description">3) Revisar el momento</span>
+            <span class="text-description">4) Listo para subir y compartir!</span class="text-description">
+            <span class="text-description">¿Quieres comenzar a crear tu guifo ahora?</span class="text-description">
+        </p>
+        <div class="navigation-buttons createGif">
+            <button class='btn choose-theme'>Cancelar</button>
+            <button class='btn choose-theme'
+                onclick="createGif()"
+            >Comenzar</button>
+        </div>
+    </div>
+
+    <div class="title misGuifos">Mis guifos</div>
+</section>
+<script type="text/javascript" src="javascript.js"></script>
+</body>
+</html>
