@@ -21,27 +21,29 @@ function getEndpoint(endpointURI, keyWord, resultsLimit, rating) { //returns str
 }
 
 function postEndpoint() { //returns string for post endpoint
- return `${POST_BASEURL}/api_key=${APIKEY}`;
+ return `${POST_BASEURL}?api_key=JQhP1sBxi7d1SKpBsMlFDJYPGUobpcpK`;
 }
 
 async function postGif(file) { // fetch API for posting gif
+
+  console.log(file);
   let response = await fetch(postEndpoint(), {
     method: 'POST',
-    body: JSON.stringify(file),
+    body: file,
     headers:{
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
     }
   });
-  console.log(response);
+ return response;
 }
 
 async function fetchGifs(endpointURI, keyWord, resultsLimit, rating) { // fetch API for getting gifs
-  let response = await fetch(getEndpoint(endpointURI, keyWord, resultsLimit, rating));
-  let responseData = await response.json(); //devuelve archivo json
-  let arrayGifsResults = responseData.data;
+  let response = await fetch(getEndpoint(endpointURI, keyWord, resultsLimit, rating))
+    .then(response => response.json())
+    .then(data => data);
 
-  return arrayGifsResults;
+  return response;
 }
 
 function toggleDropdown() {
@@ -68,7 +70,7 @@ async function searchGif() {
 
   gifResults.forEach(
     gif => ( gifResultsContainer.innerHTML += `
-    <button class="result first" id="result">${gif.title}</button>
+      <button class="result first" id="result">${gif.title}</button>
     `)
     );
     
@@ -207,7 +209,7 @@ function startVideoRecord() { //start video record with permissions
     configModal( title, content, footer );
     setSrcToImageId(objectUrl,"idImagePreviewView");
     let btnUploadGif = document.getElementById("idBtnUploadGif");
-    btnUploadGif.addEventListener("click", () => { uploadGif(gifDone) });
+    btnUploadGif.addEventListener("click", () => { uploadGif(form) });
 
   } 
 }
@@ -217,7 +219,9 @@ function setSrcToImageId(src,imageId){
   document.getElementById(imageId).src = src ;
 } 
 
-function uploadGif(gif) {
+async function uploadGif(gif) {
+
+  console.log(gif);
   let gifRecordedFile = gif;
   let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
   let content = `<div><img src='./assets/images/globe_img.png'>
@@ -227,8 +231,10 @@ function uploadGif(gif) {
   let footer = `<button class='btn'>Cancelar</button>`;
 
   configModal( title, content, footer );
-  postGif(gifRecordedFile);
-
+  let responseServer = await postGif(gifRecordedFile).then(response => {
+    return response.json();
+  });
+  console.log(responseServer);
 }
 
 
