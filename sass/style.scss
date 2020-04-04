@@ -393,6 +393,7 @@ body {
 
 /*---------------myGuifos--------*/
 
+
 .logo-container.myGifos {
     display: flex;
 }
@@ -404,7 +405,11 @@ body {
 .btn-back {
     background: none;
 }
-.crateGif-modal {
+
+/*----create guifo modal----*/
+
+
+.my-guifos-modal {
     background: #E6E6E6;
     box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
     height: 386px;
@@ -414,7 +419,7 @@ body {
     width: 684px;
 }
 
-.first-step-title {
+.title-modal {
     padding-top: 3px;
     padding-left: 4px;
     display: flex;
@@ -423,11 +428,11 @@ body {
     color: $colorWhite;
     font-size: 14px;
     letter-spacing: 0;
+    margin-bottom: 8px;
     font-weight: $fontWeightChakraPetchBold;
-    margin-bottom: 12px;
 }
 
-.createGif-subtitle {
+.subtitle-create-gif {
     display: flex;
     align-items: center;
     font-family: $fontFamilyChakraPetch;
@@ -440,12 +445,18 @@ body {
     font-weight: $fontWeightChakraPetchBold;
 }
 
+
 .subtitle {
     display: inline-block;
     margin-left: 16px;
 }
 
-.createGif-description {
+.content {
+    width: 832px;
+    height: 434px;
+}
+
+.content.create-gif {
     margin-left: 73px;
     margin-right: 93px;
     margin-bottom: 28px;
@@ -455,16 +466,6 @@ body {
     color: #110038;
     letter-spacing: 0;
     line-height: 20px;
-   
-}
-
-.navigation-buttons.createGif {
-    margin-left: 344px;
-}
-
-.createGif-section {
-    margin-left: 100px;
-    margin-right: 140px;
 }
 
 .text-description {
@@ -472,9 +473,12 @@ body {
     margin-bottom: 7px;
 }
 
-.title.misGuifos {
-    margin: 0 100px;
+.navigation-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
 }
+
 
 .getVideoCaption {
     height: 434px;
@@ -485,17 +489,8 @@ body {
     margin-bottom: 24px;
 }
 
-.navigation-buttons {
-    display: flex;
-    margin-left: 200px;
-}
-
 .btn.getCaptionImage {
     width: 36px;
-}
-
-.navigation-buttons {
-    margin-left: 663px;
 }
 
 .btn.caption {
