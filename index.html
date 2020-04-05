@@ -53,7 +53,9 @@
             <div class='text search'>Buscar</div>
             <div class='search-bar-container'>
                 <input class='search-bar' id='search-bar'
-                    placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers...">
+                    type="search"
+                    placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers..."
+                    onchange="onChangeSearchBarInput()">
                 <button class="btn search" 
                     onclick="searchGif()">
                     <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
@@ -61,27 +63,26 @@
                     <span>Buscar</span>
                 </button>
             </div>
-            <div class="search-bar-results-content" id="btn-search">
+            <div class="search-bar-results-content" id="idSearchgifResultsWrapper">
                 <div class="results-container" id ="gif-results"></div>
             </div>
+    </section>
+    <section class="tags-section" id="idTagsSection">
     </section>
     <!-- Suggested Guifos 1 -->
     <section class="suggested-guifos-container" id="suggestedGifSection">
         <div class="title list-gif">Hoy te sugerimos:</div>
-        <div class="list-gifs" id="list-suggested-gifs">
-            <!-- <div class="gif-container bordered">
-                <span class='hashtag-gif-name' id="gif-name">#Jonathanvanness</span>
-                <div class='gif-image-container'>
-                    <img class='gif-image'id="gif-image" src="">
-                    <button class='btn-see-more'>Ver más…</button>
-                </div>
-            </div> -->
-        </div>
+        <div class="list-gifs" id="list-suggested-gifs"></div>
     </section>
     <!-- trending Guifos 1 -->
-    <section class="trend-guifos-container">
+    <section class="trend-guifos-container" id="trendGifSection">
         <div class="title list-gif">Tendencias:</div>
         <div class="list-gifs" id="list-trend-gifs">
+    </section>
+    <!--search results Guifos -->
+    <section class="search-guifos-container" id="searchGifSection">
+        <div class="title list-gif">Resultados de búsqueda:</div>
+        <div class="list-gifs" id="list-search-gifs">
     </section>
     <script type="text/javascript" src="javascript.js"></script>
 </body>

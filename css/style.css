@@ -83,8 +83,8 @@ body {
 .search-bar-results-content {
   display: none;
   position: absolute;
-  top: 260px;
-  width: 1402px;
+  top: 251px;
+  width: 1503px;
   z-index: 1;
   background: #E6E6E6;
   box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
@@ -117,6 +117,9 @@ body {
 
 .show {
   display: block; }
+
+.not-show {
+  display: none; }
 
 .theme-option {
   background: #FFF4FD;
@@ -171,7 +174,7 @@ body {
   height: 99px;
   margin: 0 91px;
   padding: 1px 1px;
-  margin-bottom: 64px; }
+  margin-bottom: 12px; }
 
 .text.search {
   padding: 3px 3px;
@@ -213,6 +216,29 @@ body {
 .magnifying-glass-icon {
   width: 16px;
   height: 16px; }
+
+/*----tags section----*/
+.tags-section {
+  margin: 0 91px;
+  margin-bottom: 54px;
+  text-align: center;
+  display: flex; }
+
+.tagWrapper {
+  height: 34px;
+  background-color: goldenrod;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 7px;
+  padding-top: 8px;
+  padding-right: 8px;
+  margin-right: 8px;
+  padding-bottom: 8px;
+  background: #4180F6;
+  border: 1px solid #4C2F99;
+  box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
+  color: #FFFFFF; }
 
 /*---Suggested guifos----*/
 .suggested-guifos-container {
@@ -311,6 +337,10 @@ body {
 .trend-guifos-container {
   margin-left: 91px;
   margin-right: 91px; }
+
+/*---------search results guifos------*/
+.search-guifos-container {
+  margin: 0 91px; }
 
 /*---------------myGuifos--------*/
 .logo-container.myGifos {

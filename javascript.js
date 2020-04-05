@@ -7,7 +7,10 @@ const ENDPOINT_RANDOM = "random";
 const EMPTY_STRING = "";
 const LIST_ID_TRENDING_GIFS = "list-trend-gifs";
 const LIST_ID_SUGGESTED_GIFS = "list-suggested-gifs";
+const LIST_ID_SEARCH_GIFS = "list-search-gifs";
 const SECTION_ID_SUGGESTED_GIFS = "suggestedGifSection";
+const SECTION_ID_TREND_GIFS = "trendGifSection";
+const SECTION_ID_SEARCH_GIFS = "searchGifSection";
 const SEARCH_BAR_ID = "search-bar";
 const MY_GUIFOS_CAPTURE_VIDEO_TITLE = "Un Chequeo Antes de Empezar";
 const MY_GUIFOS_RECORD_VIDEO_TITLE = "Capturando Tu Guifo";
@@ -15,6 +18,9 @@ const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
 const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 
 let recorder;
+document.getElementById("search-bar").addEventListener("input", onChangeSearchBarInput); 
+window.onscroll = function(){functionScroll()};
+
 
 function getEndpoint(endpointURI, keyWord, resultsLimit, rating) { //returns string for endpoint
   return `${BASEURL}/${endpointURI}?api_key=${APIKEY}&q=${keyWord}&limit=${resultsLimit}&rating=${rating}`;
@@ -25,75 +31,70 @@ function postEndpoint() { //returns string for post endpoint
 }
 
 async function postGif(file) { // fetch API for posting gif
-
-  console.log(file);
   let response = await fetch(postEndpoint(), {
     method: 'POST',
-    body: file,
-    headers:{
-      // 'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    }
+    body: file
   });
  return response;
 }
 
-async function fetchGifs(endpointURI, keyWord, resultsLimit, rating) { // fetch API for getting gifs
+async function fetchGifs(endpointURI, keyWord, resultsLimit, rating) { // fetch API for gifs
   let response = await fetch(getEndpoint(endpointURI, keyWord, resultsLimit, rating))
     .then(response => response.json())
-    .then(data => data);
+    .then(responseData => responseData.data); 
 
   return response;
 }
 
-function toggleDropdown() {
-  document.getElementById("btn-dropdown").classList.toggle("show");
-}
-
-// function enableSearchButton() {
-//   let buttonSearch = document.getElementById("btn-search");
-
-//   if (SEARCH_BAR_ID !== "") {
-//     buttonSearch.disabled = false;
-//   }
-// }
-
-async function searchGif() { 
+async function onChangeSearchBarInput() { //fetch to API and display 3 results in dropdown 
   let gifResultsContainer = document.getElementById("gif-results");
   let inputText = document.getElementById("search-bar").value;
-  let sectionSuggestedGifs = document.getElementById(SECTION_ID_SUGGESTED_GIFS);
-  let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING);
   
+  
+  let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
+  
+  document.getElementById("idSearchgifResultsWrapper").classList.toggle("show"); //Display dropdown with results
+  
+  gifResults.forEach(gif => ( gifResultsContainer.innerHTML += `
+  <button class="result" id="result">${gif.title}</button>`
+  )); 
+
   gifResultsContainer.innerHTML = "";
-
-  displayfetchGifsOnElementId( LIST_ID_TRENDING_GIFS, ENDPOINT_SERCH, inputText, EMPTY_STRING, EMPTY_STRING );
-
-  gifResults.forEach(
-    gif => ( gifResultsContainer.innerHTML += `
-      <button class="result first" id="result">${gif.title}</button>
-    `)
-    );
-    
-    document.getElementById("btn-search").classList.toggle("show");
-    
-    if (gifResults.length ) {
-      sectionSuggestedGifs.style.display = "none";
-    } else null;
-
-
-  }
- 
-function changeThemeSailorNight() {
-    let body = document.body;
-    body.style.backgroundColor = "#110038";
 }
 
-function changeThemeDay() {
-    let body = document.body;
-    body.style.backgroundColor = "#FFF4FD";
+async function searchGif() {
+  let inputText = document.getElementById("search-bar").value; //analizar si es vacio que pasa
+  let gifResultstagsContainer = document.getElementById("idTagsSection");
+
+  displayfetchGifsOnElementId( LIST_ID_SEARCH_GIFS, ENDPOINT_SERCH, inputText, EMPTY_STRING, EMPTY_STRING );
+
+  document.getElementById(SECTION_ID_SUGGESTED_GIFS).classList.toggle("not-show");
+  document.getElementById(SECTION_ID_TREND_GIFS).classList.toggle("not-show");
+
+  let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
+  
+  gifResultstagsContainer.innerHTML = "";
+
+
+  //create tags for fetched gifs
+  gifResults.forEach(gif => ( gifResultstagsContainer.innerHTML += ` 
+    <div class="tagWrapper">
+    <span class="tag">${gif.title}</span>
+    </div>`
+  )); 
+
+
+  //si el scrollTop == windows.height => volve a llamar al fetch
 }
 
-async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, resultsLimit, rating ) {
+function functionScroll() {
+  let docHeight = document.scrollingElement.scrollTop;
+  let divHeight = document.getElementById("searchGifSection").offsetHeight;
+  console.log(docHeight);
+  console.log(divHeight);
+}
+
+async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, resultsLimit, rating ) { //Fetch API and insert results into DOM by an ID class given
   let gifClass = document.getElementById(elementId);
   let gifResults = await fetchGifs( endpointURI, keyWord, resultsLimit, rating );
 
@@ -106,141 +107,26 @@ async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, res
     <button class="btn-see-more">Ver más…</button>
     </div>
     </div>`)
-    );
+  ); 
 }
 
-/* MIS GUIFOS SECTION */
-
-function configModal( title, content, footer ) {
-  let modalTitle = document.getElementById("idMyGifosModalTitle");
-  let contentModal = document.getElementById("idContentMyGifosModal");
-  let footerModal = document.getElementById ("idFooter");
-
-  modalTitle.innerText = title; 
-  contentModal.innerHTML = content;
-  footerModal.innerHTML = footer;
-  
+function toggleDropdown() {
+  document.getElementById("btn-dropdown").classList.toggle("show");
 }
 
-function createGif() { //display modal of create gif
-  let title = MY_GUIFOS_CAPTURE_VIDEO_TITLE;
-  let content = `<div><video id='idVideoCaption'></video></div>`;
-  let footer = `<button class='btn' id='idBtnCaptureVideo'>Capturar</button><button class='btn'><img src='./assets/icons/camera.svg'></button>`;
-
-  configModal( title, content, footer );
-  
-  let captureBtnModal = document.getElementById("idBtnCaptureVideo");
-  captureBtnModal.addEventListener("click", recordVideo);
-  
-  initializeVideoCapture();
+function changeThemeSailorNight() {
+  let body = document.body;
+  body.style.backgroundColor = "#110038";
 }
 
-function initializeVideoCapture() {  //initialize camera caption 
- let p = navigator.mediaDevices.getUserMedia({ video: true });
-
- p.then(function(stream) {
-   let video = document.getElementById("idVideoCaption");
-   video.srcObject = stream;
-   video.play();
- });
-}
-
-function recordVideo() { //display modal of recordVideo
-  let title = MY_GUIFOS_RECORD_VIDEO_TITLE;
-  let content = `<div><video controls id='idVideoRecord'></video></div>`;
-  let footer = `<button class='btn' id='idBtnStopRecordVideo'>stop recording</button>
-    <button class='btn'>Counter</button>
-    <button class='btn' id='idBtnStartRecordVideo'>start recording</button>
-    <button class='btn'>
-      <img src='./assets/icons/recording.svg'>
-    </button>`;
-    
-  configModal( title, content, footer );
-  startVideoRecord()// Monta el modal en el DOM
-}
-
-function startVideoRecord() { //start video record with permissions
-
-  let btnStopRecording = document.getElementById("idBtnStopRecordVideo");
-  btnStopRecording.addEventListener("click", stopRecord);
-  let form = new FormData();
-  let gifDone;
-  let objectUrl;
-
-  navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-    height: { max: 480 }
-    } 
-    })
-    .then(function(stream) { 
-    let video = document.getElementById("idVideoRecord");
-    video.srcObject = stream;
-    video.play();
-
-    recorder = RecordRTC(stream, {
-      type: 'gif',
-      frameRate: 1,
-      quality: 10,
-      width: 360,
-      hidden: 240,
-      
-      onGifRecordingStarted: function() {
-       console.log('started')
-     },
-    }); 
-
-    recorder.startRecording();
-   })
-
-  function stopRecord() {
-    recorder.stopRecording(function(){
-      gifDone = this.getBlob();
-      objectUrl = this.toURL();
-        
-      form.append('file', gifDone, 'myGif.gif');
-      console.log(form.get('file'));
-    })
-
-    let title = MY_GUIFOS_PREVIEW_VIEW_TITLE;
-    let content = `<div><img src='' id='idImagePreviewView'></div>`;
-    let footer = `<button class='btn'>Repetir Captura</button><button class='btn' id='idBtnUploadGif'>Subir Guifo</button>`;
-
-    configModal( title, content, footer );
-    setSrcToImageId(objectUrl,"idImagePreviewView");
-    let btnUploadGif = document.getElementById("idBtnUploadGif");
-    btnUploadGif.addEventListener("click", () => { uploadGif(form) });
-
-  } 
-}
-
-function setSrcToImageId(src,imageId){
-
-  document.getElementById(imageId).src = src ;
-} 
-
-async function uploadGif(gif) {
-
-  console.log(gif);
-  let gifRecordedFile = gif;
-  let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
-  let content = `<div><img src='./assets/images/globe_img.png'>
-    <span>Estamos subiendo tu guifo…</span>
-    <span>Tiempo restante: 38 años algunos minutos</span>
-    </div>`;
-  let footer = `<button class='btn'>Cancelar</button>`;
-
-  configModal( title, content, footer );
-  let responseServer = await postGif(gifRecordedFile).then(response => {
-    return response.json();
-  });
-  console.log(responseServer);
+function changeThemeDay() {
+    let body = document.body;
+    body.style.backgroundColor = "#FFF4FD";
 }
 
 
 displayfetchGifsOnElementId( LIST_ID_SUGGESTED_GIFS, ENDPOINT_SERCH, "random", 4, EMPTY_STRING );
 displayfetchGifsOnElementId( LIST_ID_TRENDING_GIFS, ENDPOINT_TRENDING, EMPTY_STRING, EMPTY_STRING, "G" );
-
 
  
 
