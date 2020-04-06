@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap" rel="stylesheet">
+    <title>gifOS</title>
+</head>
+
+<body>
+    <header>
+        <!-- Menu-navigation-bar -->
+        <div class="top-header">
+            <span class='top-header-text'>¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.
+                ////// Número de visitas: 12.765.803</span>
+        </div>
+        <div class='menu-navigation-bar'>
+            <div class='logo-container'>
+                <img src='./assets/images/gifOF_logo.png' alt='gifOS logo'>
+            </div>
+            <div class='navigation-bar'>
+                <button class='btn'
+                    id="createGif"
+                    onclick="parent.location='createguifo.html'">Crear GuifOS</button>
+                <nav class='menu-select-theme' onclick="toggleDropdown()">
+                    <button class='btn choose-theme'>Elegir tema</button>
+                    <button class='btn dropdown'>
+                        <img src='./assets/icons/dropdown.svg'>
+                    </button>
+                    <div id="btn-dropdown" class="btn-dropdown-content">
+                        <button class='theme-option sailor-day'
+                            id='btn-change-theme-day'
+                            onclick="changeThemeDay()">
+                            <span class='text-underlined'>S</span>ailor Day</button>
+                        <button class='theme-option sailor-night' 
+                            id='btn-change-theme-sailor'
+                            onclick="changeThemeSailorNight()"
+                        >Sailor Night</button>
+                    </div>
+                </nav>
+                <buttton class='btn text-misGuifos'>
+                    <span class='text-underlined'>M</span>
+                    is Guifos
+                </buttton>
+            </div>
+        </div>
+    </header>
+    <!-- Suggested Guifos 1 -->
+    <section class="mis-guifos-container" id="idMisGuifosSection">
+        <div class="title list-gif">Mis guifos:</div>
+        <div class="list-gifs" id="list-mis-gifos"></div>
+    </section>
+    <script type="text/javascript" src="javascript.js"></script>
+</body>
+
+</html>
