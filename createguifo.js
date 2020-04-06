@@ -1,5 +1,7 @@
 const APIKEY = "HA7VTTTjRQ3MypIjMiiIcXq7PAFS6a5O";
 const BASEURL = "https://api.giphy.com/v1/gifs";
+const CLASSNAME_MEDIUM_WRAPPER_MODAL = "medium-wrapper";
+const CLASSNAME_BIG_WRAPPER_MODAL = "big-wrapper";
 const POST_BASEURL = "https://upload.giphy.com/v1/gifs";
 const ENDPOINT_SERCH = "search";
 const ENDPOINT_TRENDING = "trending";
@@ -16,26 +18,29 @@ const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 
 /* MIS GUIFOS SECTION */
 
-function configModal( title, content, footer ) {
-    let modalTitle = document.getElementById("idMyGifosModalTitle");
-    let contentModal = document.getElementById("idContentMyGifosModal");
-    let footerModal = document.getElementById ("idFooter");
+function configModal( title, classname, content, footer ) {
+    let createGuifoModalWrapper = document.getElementById("idCreateGuifoModalWrapper");
+    let createGuifoModalTitle = document.getElementById("idCreateGuifoModalTitle");
+    let createGuifoModalContent = document.getElementById("idCreateGuifoContentWrapperModal");
+    let createGuifoModalFooter = document.getElementById ("idCreateGuifoFooterModal");
   
-    modalTitle.innerText = title; 
-    contentModal.innerHTML = content;
-    footerModal.innerHTML = footer;
+    createGuifoModalTitle.innerText = title; 
+    createGuifoModalContent.innerHTML = content;
+    createGuifoModalFooter.innerHTML = footer;
+    createGuifoModalWrapper.classList.add(classname);
     
   }
   
   function createGif() { //display modal of create gif
     let title = MY_GUIFOS_CAPTURE_VIDEO_TITLE;
-    let content = `<div><video id='idVideoCaption'></video></div>`;
-    let footer = `<button class='btn' id='idBtnCaptureVideo'>Capturar</button><button class='btn'><img src='./assets/icons/camera.svg'></button>`;
+    let content = `<div><video class='createGuifoVideoCaptionWrapper' id='idVideoCaption'></video></div>`;
+    let footer = `<button class='btn icon-btn'><img src='./assets/icons/camera.svg'></button><button class='btn' id='idBtnCaptureVideo'>Capturar</button>`;
+
   
-    configModal( title, content, footer );
+    configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
     
     let captureBtnModal = document.getElementById("idBtnCaptureVideo");
-    captureBtnModal.addEventListener("click", recordVideo);
+    captureBtnModal.addEventListener("click", captureVideo);
     
     initializeVideoCapture();
   }
@@ -50,18 +55,14 @@ function configModal( title, content, footer ) {
    });
   }
   
-  function recordVideo() { //display modal of recordVideo
+  function captureVideo() { //display modal of recordVideo
     let title = MY_GUIFOS_RECORD_VIDEO_TITLE;
-    let content = `<div><video controls id='idVideoRecord'></video></div>`;
-    let footer = `<button class='btn' id='idBtnStopRecordVideo'>stop recording</button>
-      <button class='btn'>Counter</button>
-      <button class='btn' id='idBtnStartRecordVideo'>start recording</button>
-      <button class='btn'>
-        <img src='./assets/icons/recording.svg'>
-      </button>`;
+    let content = `<div><video class='createGuifoVideoCaptionWrapper' controls id='idVideoRecord'></video></div>`;
+    let footer = `<button class='btn icon-btn'><img src='./assets/icons/recording.svg'></button>
+      <button class='btn' id='idBtnStopRecordVideo'>stop recording</button>`;
       
-    configModal( title, content, footer );
-    startVideoRecord()// Monta el modal en el DOM
+    configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
+    startVideoRecord()
   }
   
   function startVideoRecord() { //start video record with permissions
@@ -108,10 +109,10 @@ function configModal( title, content, footer ) {
       })
   
       let title = MY_GUIFOS_PREVIEW_VIEW_TITLE;
-      let content = `<div><img src='' id='idImagePreviewView'></div>`;
+      let content = `<div><img class='previewViewImage' src='' id='idImagePreviewView'>`;
       let footer = `<button class='btn'>Repetir Captura</button><button class='btn' id='idBtnUploadGif'>Subir Guifo</button>`;
   
-      configModal( title, content, footer );
+      configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
       setSrcToImageId(objectUrl,"idImagePreviewView");
       let btnUploadGif = document.getElementById("idBtnUploadGif");
       btnUploadGif.addEventListener("click", () => { uploadGif(form) });
@@ -120,7 +121,6 @@ function configModal( title, content, footer ) {
   }
   
   function setSrcToImageId(src,imageId){
-  
     document.getElementById(imageId).src = src ;
   } 
   

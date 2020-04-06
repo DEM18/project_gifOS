@@ -50,7 +50,6 @@ async function onChangeSearchBarInput() { //fetch to API and display 3 results i
   let gifResultsContainer = document.getElementById("gif-results");
   let inputText = document.getElementById("search-bar").value;
   
-  
   let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
   
   document.getElementById("idSearchgifResultsWrapper").classList.toggle("show"); //Display dropdown with results
@@ -65,9 +64,11 @@ async function onChangeSearchBarInput() { //fetch to API and display 3 results i
 async function searchGif() {
   let inputText = document.getElementById("search-bar").value; //analizar si es vacio que pasa
   let gifResultstagsContainer = document.getElementById("idTagsSection");
-
+  
+  document.getElementById(LIST_ID_SEARCH_GIFS).innerHTML = "";
   displayfetchGifsOnElementId( LIST_ID_SEARCH_GIFS, ENDPOINT_SERCH, inputText, EMPTY_STRING, EMPTY_STRING );
-
+  
+  document.getElementById(SECTION_ID_SEARCH_GIFS).className = "show";
   document.getElementById(SECTION_ID_SUGGESTED_GIFS).classList.toggle("not-show");
   document.getElementById(SECTION_ID_TREND_GIFS).classList.toggle("not-show");
 
@@ -75,23 +76,12 @@ async function searchGif() {
   
   gifResultstagsContainer.innerHTML = "";
 
-
   //create tags for fetched gifs
   gifResults.forEach(gif => ( gifResultstagsContainer.innerHTML += ` 
     <div class="tagWrapper">
     <span class="tag">${gif.title}</span>
     </div>`
   )); 
-
-
-  //si el scrollTop == windows.height => volve a llamar al fetch
-}
-
-function functionScroll() {
-  let docHeight = document.scrollingElement.scrollTop;
-  let divHeight = document.getElementById("searchGifSection").offsetHeight;
-  console.log(docHeight);
-  console.log(divHeight);
 }
 
 async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, resultsLimit, rating ) { //Fetch API and insert results into DOM by an ID class given
@@ -136,3 +126,13 @@ displayfetchGifsOnElementId( LIST_ID_TRENDING_GIFS, ENDPOINT_TRENDING, EMPTY_STR
 //sacar input search-bar como constante
 //arreglar nombres de variables
 //ordernar alfabeticamente
+
+
+/* function functionScroll() {
+  let docHeight = document.scrollingElement.scrollTop;
+  let divHeight = document.getElementById("searchGifSection").offsetHeight;
+    if (docHeight === divHeight) {
+      return true;
+    }
+  console.log('docHeight', docHeight);
+  console.log('divHeight', divHeight); */
