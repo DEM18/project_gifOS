@@ -141,9 +141,9 @@ function configModal( title, classname, content, footer ) {
     let gifRecordedFile = gif;
     let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
     let content = `<div class='uploadGifDetails'><img class='icon-glob' src='./assets/images/globe_img.png'>
-      <span class='text-bold'>Estamos subiendo tu guifo…</span>
+      <span class='upload-details text-bold'>Estamos subiendo tu guifo…</span>
       <div class="progressive-bar" id="idProgressiveBar">
-      <div class="progression" id="idProgression">p</div>
+      <div class="progression" id="idProgression"></div>
       </div>
       <span class='progress-detail'>Tiempo restante: 38 años algunos minutos</span>
       </div>`;
@@ -151,24 +151,25 @@ function configModal( title, classname, content, footer ) {
   
     configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
   
- /*    let postRequestResponse = await postGif(gifRecordedFile)
+    let postRequestResponse = await postGif(gifRecordedFile)
       .then(response => response.json());
   
-    console.log(postRequestResponse); */
+    console.log(postRequestResponse); 
 
-    fullProgressiveBar
+
+
+     //fullProgressiveBar 
 
   }
 
-  
-  function fullProgressiveBar() {
-    /* let progressiveBar = document.getElementById("idProgressiveBar"); */
+ 
+  /*function fullProgressiveBar() {
+     let progressiveBar = document.getElementById("idProgressiveBar"); 
     let progression = document.getElementById("idProgression");
     let progressionWidth = progression.clientWidth;
 
     progressionWidth + 15;
     progression.style.width = progressionWidth;
-
-  } 
+  } */
 
   

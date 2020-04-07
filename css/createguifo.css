@@ -41,12 +41,12 @@
   justify-content: space-between;
   letter-spacing: 0;
   margin-bottom: 8px;
+  padding-bottom: 3px;
   padding-top: 3px;
   padding-left: 4px; }
 
 .content {
   width: 832px;
-  height: 434px;
   margin-bottom: 24px;
   padding: 0 14px; }
 
@@ -57,10 +57,12 @@
 
 .createGuifoVideoCaptionWrapper {
   height: 434px;
-  margin-bottom: 24px;
   width: 100%; }
 
 /*---------Modal create guifo-----------*/
+.content.main-wrapper {
+  height: 190px; }
+
 .subtitle-create-gif {
   align-items: center;
   color: #110038;
@@ -123,38 +125,45 @@
 
 /*---------Modal subiendo guifo-----------*/
 .uploadGifDetails {
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
+  height: 440px;
   align-items: center;
   justify-content: center; }
 
 .icon-glob {
-  margin-top: 139px;
   margin-bottom: 8px;
+  margin-top: 139px;
   width: 48px;
   height: 48px; }
 
-.progress-detail {
-  font-family: 400;
-  font-size: 12px;
-  color: #110038;
-  margin-top: 71px;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 14px; }
+.upload-details {
+  font-weight: 700;
+  margin-bottom: 41px; }
 
 .progressive-bar {
   width: 324px;
   height: 24px;
   margin-top: 39px;
-  background-color: green;
+  margin-bottom: 8px;
+  background-color: #999999;
   display: flex;
   align-items: center; }
 
 .progression {
   width: 15px;
   height: 24px;
-  background-color: rebeccapurple;
+  background-color: #F7C9F3;
   border: 1px solid #FFFFFF; }
+
+.progress-detail {
+  font-family: 400;
+  font-size: 12px;
+  color: #110038;
+  letter-spacing: 0;
+  margin-bottom: 138px;
+  text-align: center;
+  line-height: 14px; }
 
 /*# sourceMappingURL=createguifo.css.map */
