@@ -18,6 +18,19 @@ const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 
 /* MIS GUIFOS SECTION */
 
+function postEndpoint() { //returns string for post endpoint
+  return `${POST_BASEURL}?api_key=JQhP1sBxi7d1SKpBsMlFDJYPGUobpcpK`;
+ }
+ 
+ async function postGif(file) { // fetch API for posting gif
+   let response = await fetch(postEndpoint(), {
+     method: 'POST',
+     body: file
+   });
+  return response;
+ }
+ 
+
 function configModal( title, classname, content, footer ) {
     let createGuifoModalWrapper = document.getElementById("idCreateGuifoModalWrapper");
     let createGuifoModalTitle = document.getElementById("idCreateGuifoModalTitle");
@@ -127,16 +140,35 @@ function configModal( title, classname, content, footer ) {
   async function uploadGif(gif) {
     let gifRecordedFile = gif;
     let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
-    let content = `<div><img src='./assets/images/globe_img.png'>
-      <span>Estamos subiendo tu guifo…</span>
-      <span>Tiempo restante: 38 años algunos minutos</span>
+    let content = `<div class='uploadGifDetails'><img class='icon-glob' src='./assets/images/globe_img.png'>
+      <span class='text-bold'>Estamos subiendo tu guifo…</span>
+      <div class="progressive-bar" id="idProgressiveBar">
+      <div class="progression" id="idProgression">p</div>
+      </div>
+      <span class='progress-detail'>Tiempo restante: 38 años algunos minutos</span>
       </div>`;
     let footer = `<button class='btn'>Cancelar</button>`;
   
-    configModal( title, content, footer );
+    configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
   
-    let postRequestResponse = await postGif(gifRecordedFile)
+ /*    let postRequestResponse = await postGif(gifRecordedFile)
       .then(response => response.json());
   
-    console.log(postRequestResponse);
+    console.log(postRequestResponse); */
+
+    fullProgressiveBar
+
   }
+
+  
+  function fullProgressiveBar() {
+    /* let progressiveBar = document.getElementById("idProgressiveBar"); */
+    let progression = document.getElementById("idProgression");
+    let progressionWidth = progression.clientWidth;
+
+    progressionWidth + 15;
+    progression.style.width = progressionWidth;
+
+  } 
+
+  
