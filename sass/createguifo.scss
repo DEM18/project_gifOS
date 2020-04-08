@@ -12,10 +12,33 @@ $backgroundColorTitle: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
 $backgroundColorContent: #E6E6E6;
 $backgroundColorFooterBtn: #F7C9F3;
 
+$boxShadowTopHeader: 0 1px 0 0 #110038;
 $boxShadowContent: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
 $boxShadowFooterBtn: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
 
 $borderFooterBtn:  1px solid #110038;
+
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: #FFF4FD;
+}
+ 
+.show {
+    display: block;
+}
+
+.not-show { 
+    display: none;
+}
+
+
+ /*-------- general settings----*/
 
 .btn {
     background-color: $backgroundColorFooterBtn;
@@ -33,11 +56,12 @@ $borderFooterBtn:  1px solid #110038;
     width: 144px;
 }
 
+/*---Modal configuration---*/
+
 .modal-wrapper {
     background: $backgroundColorContent;
     box-shadow: $boxShadowContent;
     margin: 0 378px;
-    margin-bottom: 153px;
     padding-left: 3px;
     padding-right: 3px;
     padding-top: 3px;
@@ -45,13 +69,21 @@ $borderFooterBtn:  1px solid #110038;
 
 .medium-wrapper {
     height: 386px;
+    margin-bottom: 153px;
     width: 684px;
 }
 
 .big-wrapper {
     height: 548px;
     margin: 0 265px;
+    margin-bottom: 153px;
     width: 860px;
+}
+
+.small-wrapper {
+    height: 391px;
+    margin-bottom: 153px;
+    width: 721px;
 }
 
 .title-modal {
@@ -85,6 +117,40 @@ $borderFooterBtn:  1px solid #110038;
     width: 100%;
 }
 
+/*----top-header----*/
+
+.top-header {
+    background-image: $backgroundColorTitle;
+    box-shadow: $boxShadowTopHeader;
+}
+
+.top-header-text {
+    color: $colorFontWhite;
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchRegular;
+    font-size: 12px;
+    letter-spacing: 0;  
+    padding: 4px 3px 7px;
+}
+
+/*-----menu-navigation-bar----*/
+
+.logo-container {
+    height: 64px;
+    margin-top: 35px;
+    margin-left: 60px;
+    margin-bottom: 88px;
+    width: 103px;
+}
+
+.logo-container.myGifos {
+    display: flex;
+}
+
+.btn-back {
+    margin-right: 7px;
+    background: none;
+}
 /*---------Modal create guifo-----------*/
 
 .content.main-wrapper {
@@ -152,6 +218,82 @@ $borderFooterBtn:  1px solid #110038;
     font-style: italic;
 }
 
+
+/*--------Mis guifos-------*/
+
+.mis-guifos-container {
+    margin: 0 91px;
+}
+
+.title {
+    color: $colorFontBlack;
+    background: $colorFontWhite;
+    height: 32px;
+    border: 1px solid #E6BBE2;
+    box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
+    letter-spacing: 0;
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchRegular;
+    font-size: 14px;
+    padding-left: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.title.list-gif {
+    margin-bottom: 16px;
+}
+
+.list-gifs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 313px;
+    margin-bottom: 64px;
+}
+
+.gif-container.bordered {
+    background: #E6E6E6;
+    box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-bottom: 16px;
+    padding: 4px;
+}
+
+.gif-container:first-child {
+    margin-left: 0px;
+}
+
+.gif-container:last-child {
+    margin-right: 0px;
+}
+ .hashtag-gif-name {
+    align-items: center;
+    background-image: $backgroundColorTitle;
+    color: $colorFontWhite;
+    display: flex;
+    font-size: 14px;
+    font-weight: $fontWeightChakraPetchBold;
+    height: 24px;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+    padding: 3px 3px;
+    position: relative;
+    z-index: 0; 
+} 
+
+.gif-image-container {
+    height: 280px;
+    position: relative;
+    z-index: 0;
+}
+
+.gif-image {
+    width: 280px;
+    height: 100%;
+}
+ 
 /*---------Modal un chequeo antes de empezar-----------*/
 
 .btn.icon-btn {
@@ -161,6 +303,17 @@ $borderFooterBtn:  1px solid #110038;
 .previewViewImage {
     width: 100%;
     height: 434px;
+}
+
+/*---------Modal capturando tu guifo-----------*/
+
+.btn.icon-btn.red {
+    background-color: #FF6161;
+}
+
+.btn.red {
+    background-color: #FF6161;
+    color: $colorFontWhite;
 }
 
 /*---------Modal subiendo guifo-----------*/
@@ -174,15 +327,23 @@ $borderFooterBtn:  1px solid #110038;
     justify-content: center;
 }
 
+.icon-glob-wrapper {
+    margin-top: 174px;
+}
+
 .icon-glob {
     margin-bottom: 8px;
-    margin-top: 139px;
     width: 48px;
     height: 48px;
 }
 
 .upload-details {
     font-weight: $fontWeightChakraPetchBold;
+    font-family: $fontFamilyChakraPetch;
+    color: $colorFontBlack;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 22px;
     margin-bottom: 41px;
 }
 
@@ -204,12 +365,56 @@ $borderFooterBtn:  1px solid #110038;
 }
 
 .progress-detail {
-    font-family: $fontWeightChakraPetchRegular;
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchRegular;
     font-size: 12px;
-    color:$colorFontBlack;
+    color: rgba(17,0,56,0.64);
     letter-spacing: 0;
     margin-bottom: 138px;
     text-align: center;
     line-height: 14px;
+}
+
+.text-line-through {
+    text-decoration: line-through;
+}
+
+/*--------Modal Guifo subido con éxito---------*/
+
+.uploadedGuifoWrapper {
+    display: flex;
+}
+
+.imgUploadedGuifo {
+    width: 365px;
+    height: 191px;
+    background-color:azure;
+    margin-top: 27px;
+    margin-right: 24px;
+}
+
+.optionsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.uploadStatusDetail {
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchBold;
+    font-size: 16px;
+    color: $colorFontBlack;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-bottom: 16px;
+}
+
+.btn.option.one {
+    width: 256px;
+    height: 36px;
+}
+
+.btn.option.one.option1 {
+    margin-bottom: 14px;
 }
 

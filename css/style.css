@@ -350,7 +350,9 @@ body {
   margin-left: 7px; }
 
 .btn-back {
-  background: none; }
+  background: none;
+  width: 24px;
+  height: 24px; }
 
 /*----create guifo modal----*/
 .getVideoCaption {

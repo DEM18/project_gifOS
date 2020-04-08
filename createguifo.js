@@ -2,6 +2,9 @@ const APIKEY = "HA7VTTTjRQ3MypIjMiiIcXq7PAFS6a5O";
 const BASEURL = "https://api.giphy.com/v1/gifs";
 const CLASSNAME_MEDIUM_WRAPPER_MODAL = "medium-wrapper";
 const CLASSNAME_BIG_WRAPPER_MODAL = "big-wrapper";
+const CLASSNAME_SMALL_WRAPPER_MODAL = "small-wrapper";
+const CLASSNAME_DISPLAY_ELEMENT = "show";
+const CLASSNAME_HIDE_ELEMENT = "not-show";
 const POST_BASEURL = "https://upload.giphy.com/v1/gifs";
 const ENDPOINT_SERCH = "search";
 const ENDPOINT_TRENDING = "trending";
@@ -15,6 +18,7 @@ const MY_GUIFOS_CAPTURE_VIDEO_TITLE = "Un Chequeo Antes de Empezar";
 const MY_GUIFOS_RECORD_VIDEO_TITLE = "Capturando Tu Guifo";
 const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
 const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
+const MY_GUIFOS_UPLOADED_GIF_TITLE = "Guifo Subido Con Éxito";
 
 /* MIS GUIFOS SECTION */
 
@@ -45,6 +49,8 @@ function configModal( title, classname, content, footer ) {
   }
   
   function createGif() { //display modal of create gif
+    document.getElementById("idMisGuifosSection").classList.add(CLASSNAME_HIDE_ELEMENT);
+
     let title = MY_GUIFOS_CAPTURE_VIDEO_TITLE;
     let content = `<div><video class='createGuifoVideoCaptionWrapper' id='idVideoCaption'></video></div>`;
     let footer = `<button class='btn icon-btn'><img src='./assets/icons/camera.svg'></button><button class='btn' id='idBtnCaptureVideo'>Capturar</button>`;
@@ -71,8 +77,8 @@ function configModal( title, classname, content, footer ) {
   function captureVideo() { //display modal of recordVideo
     let title = MY_GUIFOS_RECORD_VIDEO_TITLE;
     let content = `<div><video class='createGuifoVideoCaptionWrapper' controls id='idVideoRecord'></video></div>`;
-    let footer = `<button class='btn icon-btn'><img src='./assets/icons/recording.svg'></button>
-      <button class='btn' id='idBtnStopRecordVideo'>stop recording</button>`;
+    let footer = `<button class='btn icon-btn red'><img src='./assets/icons/recording.svg'></button>
+      <button class='btn red' id='idBtnStopRecordVideo'>Listo</button>`;
       
     configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
     startVideoRecord()
@@ -116,14 +122,16 @@ function configModal( title, classname, content, footer ) {
       recorder.stopRecording(function(){
         gifDone = this.getBlob();
         objectUrl = this.toURL();
-          
+
         form.append('file', gifDone, 'myGif.gif');
         console.log(form.get('file'));
+
+        
       })
   
       let title = MY_GUIFOS_PREVIEW_VIEW_TITLE;
       let content = `<div><img class='previewViewImage' src='' id='idImagePreviewView'>`;
-      let footer = `<button class='btn'>Repetir Captura</button><button class='btn' id='idBtnUploadGif'>Subir Guifo</button>`;
+      let footer = `<button class='btn one'>Repetir Captura</button><button class='btn two' id='idBtnUploadGif'>Subir Guifo</button>`;
   
       configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
       setSrcToImageId(objectUrl,"idImagePreviewView");
@@ -140,28 +148,41 @@ function configModal( title, classname, content, footer ) {
   async function uploadGif(gif) {
     let gifRecordedFile = gif;
     let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
-    let content = `<div class='uploadGifDetails'><img class='icon-glob' src='./assets/images/globe_img.png'>
+    let content = `<div class='uploadGifDetails'><div class='icon-glob-wrapper'><img class='icon-glob' src='./assets/images/globe_img.png'></div>
       <span class='upload-details text-bold'>Estamos subiendo tu guifo…</span>
       <div class="progressive-bar" id="idProgressiveBar">
       <div class="progression" id="idProgression"></div>
       </div>
-      <span class='progress-detail'>Tiempo restante: 38 años algunos minutos</span>
+      <span class='progress-detail'>Tiempo restante: <span class='text-line-through'>38 años</span> algunos minutos</span>
       </div>`;
-    let footer = `<button class='btn'>Cancelar</button>`;
-  
+    let footer = `<button class='btn'>Cancelar</button><button class='btn' id='btnTest'>test</button>`;
+    
     configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
   
     let postRequestResponse = await postGif(gifRecordedFile)
       .then(response => response.json());
+
+    document.getElementById("btnTest").addEventListener("click", showUploadedGifOptions);
   
     console.log(postRequestResponse); 
 
-
-
      //fullProgressiveBar 
-
   }
 
+  function showUploadedGifOptions() {
+    let title = MY_GUIFOS_UPLOADED_GIF_TITLE;
+    let content = `<div class='uploadedGuifoWrapper'>  
+      <div class='imgUploadedGuifo'><img src=''></div>
+      <div class='optionsWrapper'>
+      <span class='uploadStatusDetail'>Guifo creado con éxito</span>
+      <button class='btn option one option1'>Copiar Enlace Guifo</button>
+      <button class='btn option one option2'>Descargar Guifo</button>
+      </div>
+    </div>`;
+    let footer = `<button class='btn'>Listo</button>`;
+
+    configModal( title, CLASSNAME_SMALL_WRAPPER_MODAL, content, footer);
+  }
  
   /*function fullProgressiveBar() {
      let progressiveBar = document.getElementById("idProgressiveBar"); 
