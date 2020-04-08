@@ -1,0 +1,88 @@
+/*--------Mis guifos-------*/
+
+.logo-container.myGifos {
+    display: flex;
+}
+
+.logo {
+    margin-left: 7px;
+}
+
+.btn-back {
+    background: none;
+    width: 24px;
+    height: 24px;
+}
+
+.mis-guifos-container {
+    margin: 0 91px;
+}
+
+.title {
+    color: $colorFontBlack;
+    background: $colorFontWhite;
+    height: 32px;
+    border: 1px solid #E6BBE2;
+    box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
+    letter-spacing: 0;
+    font-family: $fontFamilyChakraPetch;
+    font-weight: $fontWeightChakraPetchRegular;
+    font-size: 14px;
+    padding-left: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.title.list-gif {
+    margin-bottom: 16px;
+}
+
+.list-gifs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 313px;
+    margin-bottom: 64px;
+}
+
+.gif-container.bordered {
+    background: #E6E6E6;
+    box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-bottom: 16px;
+    padding: 4px;
+}
+
+.gif-container:first-child {
+    margin-left: 0px;
+}
+
+.gif-container:last-child {
+    margin-right: 0px;
+}
+ .hashtag-gif-name {
+    align-items: center;
+    background-image: $backgroundColorTitle;
+    color: $colorFontWhite;
+    display: flex;
+    font-size: 14px;
+    font-weight: $fontWeightChakraPetchBold;
+    height: 24px;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+    padding: 3px 3px;
+    position: relative;
+    z-index: 0; 
+} 
+
+.gif-image-container {
+    height: 280px;
+    position: relative;
+    z-index: 0;
+}
+
+.gif-image {
+    width: 280px;
+    height: 100%;
+}

@@ -57,10 +57,11 @@
                     type="search"
                     placeholder="Buscar gifs, hashtags. temas, buscas lo que quiers..."
                     onchange="onChangeSearchBarInput()">
-                <button class="btn search" 
+                <button class="btn-search" id='idBtnSearch'
+                    type="button"
+                    disabled
                     onclick="searchGif()">
-                    <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>
-                    
+                    <img class='magnifying-glass-icon' src='./assets/icons/lupa.svg'>          
                     <span>Buscar</span>
                 </button>
             </div>
@@ -81,11 +82,11 @@
         <div class="list-gifs" id="list-trend-gifs"></div>
     </section>
     <!--search results Guifos -->
-    <section class="search-guifos-container not-show" id="searchGifSection">
+    <section class="search-guifos-container" id="searchGifSection">
         <div class="title list-gif">Resultados de búsqueda:</div>
         <div class="list-gifs" id="list-search-gifs"></div>
     </section>
-    <script type="text/javascript" src="javascript.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 
 </html>

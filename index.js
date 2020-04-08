@@ -19,7 +19,7 @@ const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 
 let recorder;
 document.getElementById("search-bar").addEventListener("input", onChangeSearchBarInput); 
-window.onscroll = function(){functionScroll()};
+document.getElementById("list-trend-gifs")
 
 
 function getEndpoint(endpointURI, keyWord, resultsLimit, rating) { //returns string for endpoint
@@ -49,7 +49,12 @@ async function fetchGifs(endpointURI, keyWord, resultsLimit, rating) { // fetch 
 async function onChangeSearchBarInput() { //fetch to API and display 3 results in dropdown 
   let gifResultsContainer = document.getElementById("gif-results");
   let inputText = document.getElementById("search-bar").value;
-  
+  let searchBarInput = document.getElementById("search-bar");
+
+  if (searchBarInput != "") {
+    document.getElementById("idBtnSearch").disabled = false;
+  }
+
   let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
   
   document.getElementById("idSearchgifResultsWrapper").classList.toggle("show"); //Display dropdown with results
@@ -62,13 +67,13 @@ async function onChangeSearchBarInput() { //fetch to API and display 3 results i
 }
 
 async function searchGif() {
-  let inputText = document.getElementById("search-bar").value; //analizar si es vacio que pasa
+  let inputText = document.getElementById("search-bar").value; 
   let gifResultstagsContainer = document.getElementById("idTagsSection");
   
   document.getElementById(LIST_ID_SEARCH_GIFS).innerHTML = "";
   displayfetchGifsOnElementId( LIST_ID_SEARCH_GIFS, ENDPOINT_SERCH, inputText, EMPTY_STRING, EMPTY_STRING );
   
-  document.getElementById(SECTION_ID_SEARCH_GIFS).className = "show";
+  document.getElementById(SECTION_ID_SEARCH_GIFS).style.display = "block";
   document.getElementById(SECTION_ID_SUGGESTED_GIFS).classList.toggle("not-show");
   document.getElementById(SECTION_ID_TREND_GIFS).classList.toggle("not-show");
 
@@ -86,18 +91,36 @@ async function searchGif() {
 
 async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, resultsLimit, rating ) { //Fetch API and insert results into DOM by an ID class given
   let gifClass = document.getElementById(elementId);
+  let gifClassName = elementId;
   let gifResults = await fetchGifs( endpointURI, keyWord, resultsLimit, rating );
 
-  gifResults.forEach(
-    gif =>
-    (gifClass.innerHTML += `
-    <div class="gif-container bordered">
-    <div class="gif-image-container">
-    <img class="gif-image" src=${gif.images.fixed_height.url}>
-    <button class="btn-see-more">Ver más…</button>
-    </div>
-    </div>`)
-  ); 
+  if (gifClassName === LIST_ID_SUGGESTED_GIFS) {
+    gifResults.forEach(
+      gif =>
+      (gifClass.innerHTML += `
+      <div class="gif-container bordered">  
+        <div class='hashtag-gif-name-wrapper'>
+          <span class='gif-name'>#Jonathanvanness</span>
+          <img class='btn-close' src='./assets/icons/button3.svg'>	
+        </div>
+      <div class="gif-image-container">
+        <img class="gif-image" src=${gif.images.fixed_height.url}>
+        <button class="btn-see-more">Ver más…</button>
+        </div>
+      </div>`)
+    ); 
+  } else if (gifClassName === LIST_ID_SEARCH_GIFS || gifClassName === LIST_ID_TRENDING_GIFS) {
+    gifResults.forEach(
+      gif =>
+      (gifClass.innerHTML += `
+      <div class="gif-container bordered">
+      <div class="gif-image-container">
+        <img class="gif-image" src=${gif.images.fixed_height.url}>
+        <button class="btn-see-more">Ver más…</button>
+        </div>
+      </div>`)
+    ); 
+  }
 }
 
 function toggleDropdown() {

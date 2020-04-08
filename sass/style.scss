@@ -1,35 +1,23 @@
-/*/// VARIABLES ///*/
-
-/*--font-family---*/
+/* SAILOR DAY THEME */
 
 $fontFamilyChakraPetch: 'Chakra Petch';
-
-/*----font-weight----*/
 
 $fontWeightChakraPetchBold: 700;
 $fontWeightChakraPetchRegular: 400;
 
-/*---colors---*/
+$colorFontWhite: #FFFFFF;
+$colorFontBlack: #110038;
 
-$colorBlack: #110038;
-$colorWhite: #FFFFFF;
+$backgroundColorBody: #FFF4FD;
+$backgroundColorTitle: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
+$backgroundColorContent: #E6E6E6;
+$backgroundColorFooterBtn: #F7C9F3;
 
-/*---background-colors---*/
+$boxShadowTopHeader: 0 1px 0 0 #110038;
+$boxShadowContent: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+$boxShadowFooterBtn: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
 
-$theme1BtnBorder:  1px solid #110038;
-$theme1BtnDropdownThemeOptionBorder:  1px solid #CCA6C9;
-$theme1BtnHoverBackground: #E6BBE2;
-$theme1BtnNormalBackground:  #F7C9F3;
-$theme1BtnDropdownBackground: #E6E6E6;
-$theme1BtnDropdownThemeOptionBackground: #FFF4FD;
-$theme1BackgroundImage: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
-
-/*----Box shadows----*/
-
-$theme1BtnBoxShadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-$theme1BtnDropdownBoxShadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
-$theme1BtnDropdownThemeOptionBoxShadow: inset -1px -1px 0 0 #E6DCE4, inset 1px 1px 0 0 #FFFFFF;
-/*/// VARIABLES ///*/
+$borderFooterBtn:  1px solid #110038;
 
 * {
     border: 0;
@@ -38,29 +26,30 @@ $theme1BtnDropdownThemeOptionBoxShadow: inset -1px -1px 0 0 #E6DCE4, inset 1px 1
 }
 
 body {
-    background-color: #FFF4FD;
+    background-color: $backgroundColorBody;
 }
+
 /*----top-header----*/
 
 .top-header {
-    background-image: $theme1BackgroundImage;
-    box-shadow: 0 1px 0 0 #110038;
+    background-image: $backgroundColorTitle;
+    box-shadow: $boxShadowTopHeader;
 }
 
 .top-header-text {
-    color: $colorWhite;
+    color: $colorFontWhite;
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightChakraPetchRegular;
     font-size: 12px;
     letter-spacing: 0;  
     padding: 4px 3px 7px;
 }
- 
+
 /*-----menu-navigation-bar----*/
 
 .menu-navigation-bar {
     display: flex;
-    margin: 0 91px;
+    margin: 0 140px;
     justify-content: space-between;
     margin-bottom: 35px;
 }
@@ -79,10 +68,10 @@ body {
 }
 
 .btn {
-    background-color: $theme1BtnNormalBackground;
-    border: $theme1BtnBorder;
+    background-color: $backgroundColorFooterBtn;
+    border: $borderFooterBtn;
     box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-    color: $colorBlack;
+    color: $colorFontBlack;
     cursor: pointer;
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightChakraPetchRegular;
@@ -93,13 +82,6 @@ body {
     text-align: center;
     width: 144px;
 }
-
-
-// .btn:hover,
-// .btn:active {
-//     background: $theme1BtnHoverBackground;
-// }
-
 
 .btn.dropdown{
     width: 36px;
@@ -119,8 +101,8 @@ body {
     min-width: 167px;
     top: 36px;
     z-index: 1;
-    background: $theme1BtnDropdownBackground;
-    box-shadow: $theme1BtnDropdownBoxShadow;
+    background: $backgroundColorContent;
+    box-shadow: $boxShadowContent;
     padding: 10px 10px 10px 10px;
 }
 /*-------search-bar-section------------*/
@@ -131,8 +113,8 @@ body {
     top: 251px;
     width: 1503px;
     z-index: 1;
-    background: $theme1BtnDropdownBackground;
-    box-shadow: $theme1BtnDropdownBoxShadow;
+    background: $backgroundColorContent;
+    box-shadow: $boxShadowContent;
     padding: 10px 10px 10px 10px;
 }
 
@@ -148,7 +130,7 @@ body {
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightChakraPetchRegular;
     font-size: 16px;
-    color: #110038;
+    color: $colorFontBlack;
     letter-spacing: 0;
     line-height: 22px;
     background: #F0F0F0;
@@ -161,7 +143,7 @@ body {
 }
 
 .result-first {
-    border: 1px solid #110038;
+    border: 1px solid $colorFontBlack;
 }
 
 .show {
@@ -173,13 +155,13 @@ body {
 }
 
 .theme-option {
-    background: $theme1BtnDropdownThemeOptionBackground;
-    border: $theme1BtnDropdownThemeOptionBorder;
-    box-shadow: $theme1BtnDropdownThemeOptionBoxShadow;
+    background: $backgroundColorContent;
+    border: $backgroundColorContent;
+    box-shadow: $boxShadowContent;
     font-family: $fontFamilyChakraPetch;
     font-size: 16px;
     height: 36px;
-    color: #110038;
+    color:$colorFontBlack;
     letter-spacing: 0;
     line-height: 22px;
     width: 150px;
@@ -202,7 +184,7 @@ body {
     display: flex;
     align-items: center;
     box-shadow: none;
-    color: $colorBlack;
+    color: $colorFontBlack;
     cursor: pointer;
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightChakraPetchRegular;
@@ -218,7 +200,7 @@ body {
 }
 
 .btn.text-misGuifos:active {
-    color: #110038;
+    color: $colorFontBlack;
 }
 
 .text-underlined {
@@ -231,18 +213,18 @@ body {
     background: #E6E6E6;
     box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
     height: 99px;
-    margin: 0 91px;
+    margin: 0 140px;
     padding: 1px 1px;
     margin-bottom: 12px;
 }
 
 .text.search {
     padding: 3px 3px;
-    background-image: $theme1BackgroundImage;
-    color: $colorWhite;
+    background-image: $backgroundColorTitle;
+    color: $colorFontWhite;
     font-size: 14px;
     letter-spacing: 0;
-    font-weight: $fontWeightChakraPetchBold;
+    font-weight: $fontFamilyChakraPetch;
     margin-bottom: 12px;
 }
 
@@ -254,28 +236,35 @@ body {
 .search-bar {
     height: 48px;
     margin-left: 15px;
-    background: $colorWhite;
+    background: $colorFontWhite;
     border: 1px solid #979797;
     box-shadow: inset -2px -2px 0 0 #E6E6E6, inset 2px 2px 0 0 #000000;
     padding: 13px 16px;
     width: 100%;
 }
 
-.btn.search {
+.btn-search {
     width: 102px;
     height: 36px;
     margin-left: 8px;
     margin-right: 18px;
     font-size: 16px;
-    color: #B4B4B4;
-    letter-spacing: 0;
     line-height: 18px;
     padding-left:10px;
     padding-top: 9px;
     padding-bottom: 9px;
+    background: #E6E6E6;
+    border: 1px solid #808080;
+    box-shadow: inset -1px -1px 0 0 #B4B4B4, inset 1px 1px 0 0 #FFFFFF;
+}
+
+/* .btn.search {
+    background:none;
+    color: #B4B4B4;
+    letter-spacing: 0;
     font-family: $fontFamilyChakraPetch;
     font-weight: $fontWeightChakraPetchRegular; 
-}
+} */
 
 .magnifying-glass-icon{
     width: 16px;
@@ -285,7 +274,7 @@ body {
 /*----tags section----*/
 
 .tags-section {
-    margin: 0 91px;
+    margin: 0 140px;
     margin-bottom: 54px;
     text-align: center;
     display: flex;
@@ -305,17 +294,17 @@ body {
     background: #4180F6;
     border: 1px solid #4C2F99;
     box-shadow: inset -2px -2px 0 0 #284F99, inset 2px 2px 0 0 #FFFFFF;
-    color: $colorWhite;
+    color: $colorFontWhite;
 }
 
 /*---Suggested guifos----*/
 
 .suggested-guifos-container {
-    margin: 0 91px;
+    margin: 0 140px;
 }
 
 .title {
-    color: #110038;
+    color: $colorFontBlack;
     background: #FFFAFE;
     height: 32px;
     border: 1px solid #E6BBE2;
@@ -357,20 +346,25 @@ body {
 .gif-container:last-child {
     margin-right: 0px;
 }
- .hashtag-gif-name {
+ .hashtag-gif-name-wrapper {
     align-items: center;
-    background-image: $theme1BackgroundImage;
-    color: $colorWhite;
+    background-image: $backgroundColorTitle;
     display: flex;
-    font-size: 14px;
-    font-weight: $fontWeightChakraPetchBold;
+    
     height: 24px;
-    letter-spacing: 0;
+    
     margin-bottom: 2px;
     padding: 3px 3px;
     position: relative;
     z-index: 0; 
-} 
+}
+
+.gif-name {
+    color: $colorFontWhite;
+    font-size: 14px;
+    font-weight: $fontWeightChakraPetchBold;
+    letter-spacing: 0;
+}
 
 .gif-image-container {
     height: 280px;
@@ -413,62 +407,14 @@ body {
     margin-left: 7px;
 }
 
-
 /*----------Trend guifos section------------*/
 
 .trend-guifos-container {
-    margin-left: 91px;
-    margin-right: 91px;
+    margin: 0 140px;
 }
-
 
 /*---------search results guifos------*/
 .search-guifos-container {
-    margin: 0 91px;
-}
-/*---------------myGuifos--------*/
-
-
-.logo-container.myGifos {
-    display: flex;
-}
-
-.logo {
-    margin-left: 7px;
-}
-
-.btn-back {
-    background: none;
-    width: 24px;
-    height: 24px;
-}
-
-/*----create guifo modal----*/
-
-.getVideoCaption {
-    height: 434px;
-    margin-left: 8px;
-    margin-right: 8px;
-    background-color: azure;
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.btn.getCaptionImage {
-    width: 36px;
-}
-
-.btn.caption {
-    margin-right: 13px;
-}
-
-.close-btn {
-    margin-right: 8px;
-}
-
-
-/*--------mis guifos-----*/
-
-.mis-guifos-container {
-    margin: 0 91px;
+    margin: 0 140px;
+    display: none;
 }
