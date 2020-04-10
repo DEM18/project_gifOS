@@ -1,10 +1,7 @@
-const APIKEY = "HA7VTTTjRQ3MypIjMiiIcXq7PAFS6a5O";
-const BASEURL = "https://api.giphy.com/v1/gifs";
-const POST_BASEURL = "https://upload.giphy.com/v1/gifs";
-const ENDPOINT_SERCH = "search";
-const ENDPOINT_TRENDING = "trending";
-const ENDPOINT_RANDOM = "random";
-const EMPTY_STRING = "";
+const BACKGROUND_COLOR_SAILOR_DAY = "#110038";
+const BACKGROUND_COLOR_SAILOR_NIGHT = "##FFF4FD";
+const BUTTON_VALUE_SAILOR_DAY = "sailor-day";
+const BUTTON_VALUE_SAILOR_NIGHT = "sailor-night";
 const LIST_ID_TRENDING_GIFS = "list-trend-gifs";
 const LIST_ID_SUGGESTED_GIFS = "list-suggested-gifs";
 const LIST_ID_SEARCH_GIFS = "list-search-gifs";
@@ -16,15 +13,17 @@ const MY_GUIFOS_CAPTURE_VIDEO_TITLE = "Un Chequeo Antes de Empezar";
 const MY_GUIFOS_RECORD_VIDEO_TITLE = "Capturando Tu Guifo";
 const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
 const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
+const EMPTY_STRING = "";
 
 let recorder;
 document.getElementById("search-bar").addEventListener("input", onChangeSearchBarInput); 
-document.getElementById("list-trend-gifs")
 
+/* 
 
-function getEndpoint(endpointURI, keyWord, resultsLimit, rating) { //returns string for endpoint
-  return `${BASEURL}/${endpointURI}?api_key=${APIKEY}&q=${keyWord}&limit=${resultsLimit}&rating=${rating}`;
+function getSuggestedGifEndpoint(endpointURI, term) { //returns string for endpoint
+  return `${BASEURL_SUGGESTED_GIF}/${endpointURI}?api_key=${APIKEY}&q=${term}`;
 }
+
 
 function postEndpoint() { //returns string for post endpoint
  return `${POST_BASEURL}?api_key=JQhP1sBxi7d1SKpBsMlFDJYPGUobpcpK`;
@@ -46,8 +45,51 @@ async function fetchGifs(endpointURI, keyWord, resultsLimit, rating) { // fetch 
   return response;
 }
 
-async function onChangeSearchBarInput() { //fetch to API and display 3 results in dropdown 
+
+async function fetchSuggestedGifs(endpointURI, term) { // fetch API for gifs
+  let response = await fetch(getSuggestedGifEndpoint(endpointURI, term))
+    .then(response => response.json())
+    .then(responseData => responseData.data); 
+
+  return response;
+} */
+
+async function displayGifsSectionByElementId( results, elementId ) { 
+  let gifsSectionWrapper = document.getElementById( elementId );
+  gifResults = results;
+
+  gifsSectionWrapper.innerHTML ="";
+
+  gifResults.forEach(
+      gif => ( 
+          gifsSectionWrapper.innerHTML += getGifWrapper( gif , elementId )
+      )
+  ); 
+}
+
+function displaySearchbBarDropdownResults( results ) {
   let gifResultsContainer = document.getElementById("gif-results");
+  let fetchGifResults = results;
+
+  document.getElementById("idSearchgifResultsWrapper").classList.toggle("show");
+
+  fetchGifResults.forEach(gif => ( gifResultsContainer.innerHTML += `
+  <button class="result" id="result">${gif.title}</button>`
+  )); 
+}
+
+function displaySuggestionsGifsTags( results ) {
+  let fetchGifResults = results;
+  let gifResultstagsContainer = document.getElementById("idTagsSection");
+
+  fetchGifResults.forEach(gif => ( gifResultstagsContainer.innerHTML += ` 
+    <div class="tagWrapper">
+    <span class="tag">${gif.title}</span>
+    </div>`
+  )); 
+} 
+
+async function onChangeSearchBarInput() { 
   let inputText = document.getElementById("search-bar").value;
   let searchBarInput = document.getElementById("search-bar");
 
@@ -55,107 +97,43 @@ async function onChangeSearchBarInput() { //fetch to API and display 3 results i
     document.getElementById("idBtnSearch").disabled = false;
   }
 
-  let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
-  
-  document.getElementById("idSearchgifResultsWrapper").classList.toggle("show"); //Display dropdown with results
-  
-  gifResults.forEach(gif => ( gifResultsContainer.innerHTML += `
-  <button class="result" id="result">${gif.title}</button>`
-  )); 
+  fetchSearchGifs( inputText);
+  displaySuggestionsGifsTags();
+  displaySearchbBarDropdownResults();
 
-  gifResultsContainer.innerHTML = "";
 }
 
 async function searchGif() {
   let inputText = document.getElementById("search-bar").value; 
-  let gifResultstagsContainer = document.getElementById("idTagsSection");
-  
-  document.getElementById(LIST_ID_SEARCH_GIFS).innerHTML = "";
-  displayfetchGifsOnElementId( LIST_ID_SEARCH_GIFS, ENDPOINT_SERCH, inputText, EMPTY_STRING, EMPTY_STRING );
-  
+
+  document.getElementById(SECTION_ID_SUGGESTED_GIFS).classList.add("not-show");
+  document.getElementById(SECTION_ID_TREND_GIFS).classList.add("not-show");
+
+  fetchSearchGifs( inputText );
+
+  //display fetchgifs();
+
   document.getElementById(SECTION_ID_SEARCH_GIFS).style.display = "block";
-  document.getElementById(SECTION_ID_SUGGESTED_GIFS).classList.toggle("not-show");
-  document.getElementById(SECTION_ID_TREND_GIFS).classList.toggle("not-show");
-
-  let gifResults = await fetchGifs(ENDPOINT_SERCH, inputText, 3, EMPTY_STRING); 
-  
-  gifResultstagsContainer.innerHTML = "";
-
-  //create tags for fetched gifs
-  gifResults.forEach(gif => ( gifResultstagsContainer.innerHTML += ` 
-    <div class="tagWrapper">
-    <span class="tag">${gif.title}</span>
-    </div>`
-  )); 
 }
 
-async function displayfetchGifsOnElementId( elementId, endpointURI, keyWord, resultsLimit, rating ) { //Fetch API and insert results into DOM by an ID class given
-  let gifClass = document.getElementById(elementId);
-  let gifClassName = elementId;
-  let gifResults = await fetchGifs( endpointURI, keyWord, resultsLimit, rating );
-
-  if (gifClassName === LIST_ID_SUGGESTED_GIFS) {
-    gifResults.forEach(
-      gif =>
-      (gifClass.innerHTML += `
-      <div class="gif-container bordered">  
-        <div class='hashtag-gif-name-wrapper'>
-          <span class='gif-name'>#Jonathanvanness</span>
-          <img class='btn-close' src='./assets/icons/button3.svg'>	
-        </div>
-      <div class="gif-image-container">
-        <img class="gif-image" src=${gif.images.fixed_height.url}>
-        <button class="btn-see-more">Ver más…</button>
-        </div>
-      </div>`)
-    ); 
-  } else if (gifClassName === LIST_ID_SEARCH_GIFS || gifClassName === LIST_ID_TRENDING_GIFS) {
-    gifResults.forEach(
-      gif =>
-      (gifClass.innerHTML += `
-      <div class="gif-container bordered">
-      <div class="gif-image-container">
-        <img class="gif-image" src=${gif.images.fixed_height.url}>
-        <button class="btn-see-more">Ver más…</button>
-        </div>
-      </div>`)
-    ); 
-  }
+function toggleChangeThemeDropdown() {
+  document.getElementById("dropdown-change-theme").classList.toggle("show");
 }
 
-function toggleDropdown() {
-  document.getElementById("btn-dropdown").classList.toggle("show");
-}
-
-function changeThemeSailorNight() {
+function changeThemeOfPage() {
   let body = document.body;
-  body.style.backgroundColor = "#110038";
+  let dropdownChangeTheme = document.getElementById("dropdown-change-theme");
+  let dropdownSelectedOption = dropdownChangeTheme.value;
+
+  switch (dropdownSelectedOption) {
+    case BUTTON_VALUE_SAILOR_DAY:
+      body.style.backgroundColor = BACKGROUND_COLOR_SAILOR_DAY;
+    break;
+    case BUTTON_VALUE_SAILOR_NIGHT:
+      body.style.backgroundColor = BACKGROUND_COLOR_SAILOR_NIGHT;
+    break;
+  }  
 }
 
-function changeThemeDay() {
-    let body = document.body;
-    body.style.backgroundColor = "#FFF4FD";
-}
 
-
-displayfetchGifsOnElementId( LIST_ID_SUGGESTED_GIFS, ENDPOINT_SERCH, "random", 4, EMPTY_STRING );
-displayfetchGifsOnElementId( LIST_ID_TRENDING_GIFS, ENDPOINT_TRENDING, EMPTY_STRING, EMPTY_STRING, "G" );
-
- 
-
-// changeTheme();
-/*-------------------------------*/
-//TODO
-//sacar input search-bar como constante
-//arreglar nombres de variables
-//ordernar alfabeticamente
-
-
-/* function functionScroll() {
-  let docHeight = document.scrollingElement.scrollTop;
-  let divHeight = document.getElementById("searchGifSection").offsetHeight;
-    if (docHeight === divHeight) {
-      return true;
-    }
-  console.log('docHeight', docHeight);
-  console.log('divHeight', divHeight); */
+displayGifsSectionByElementId( fetchRandomGifs(), LIST_ID_SUGGESTED_GIFS );

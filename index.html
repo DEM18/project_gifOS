@@ -25,20 +25,20 @@
                 <button class='btn'
                     id="createGif"
                     onclick="parent.location='createguifo.html'">Crear GuifOS</button>
-                <nav class='menu-select-theme' onclick="toggleDropdown()">
+                <nav class='menu-select-theme' onclick="toggleChangeThemeDropdown()">
                     <button class='btn choose-theme'>Elegir tema</button>
                     <button class='btn dropdown'>
                         <img src='./assets/icons/dropdown.svg'>
                     </button>
-                    <div id="btn-dropdown" class="btn-dropdown-content">
+                    <div id="dropdown-change-theme" class="btn-dropdown-content" onclick="changeThemeOfPage()">
                         <button class='theme-option sailor-day'
-                            id='btn-change-theme-day'
-                            onclick="changeThemeDay()">
+                            id='btn-sailor-day'
+                            value="sailor-day">
                             <span class='text-underlined'>S</span>ailor Day</button>
                         <button class='theme-option sailor-night' 
-                            id='btn-change-theme-sailor'
-                            onclick="changeThemeSailorNight()"
-                        >Sailor Night</button>
+                            id='btn-sailor-night'
+                            value="sailor-night"
+                            >Sailor Night</button>
                     </div>
                 </nav>
                 <buttton class='btn text-misGuifos'
@@ -72,12 +72,12 @@
     <section class="tags-section" id="idTagsSection">
     </section>
     <!-- Suggested Guifos 1 -->
-    <section class="suggested-guifos-container" id="suggestedGifSection">
+    <section class="suggested-guifos-container show" id="suggestedGifSection">
         <div class="title list-gif">Hoy te sugerimos:</div>
         <div class="list-gifs" id="list-suggested-gifs"></div>
     </section>
     <!-- trending Guifos 1 -->
-    <section class="trend-guifos-container" id="trendGifSection">
+    <section class="trend-guifos-container show" id="trendGifSection">
         <div class="title list-gif">Tendencias:</div>
         <div class="list-gifs" id="list-trend-gifs"></div>
     </section>
@@ -86,6 +86,7 @@
         <div class="title list-gif">Resultados de búsqueda:</div>
         <div class="list-gifs" id="list-search-gifs"></div>
     </section>
+    <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </body>
 
