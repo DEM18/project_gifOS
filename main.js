@@ -1,5 +1,6 @@
 const APIKEY = "HA7VTTTjRQ3MypIjMiiIcXq7PAFS6a5O";
 const BASEURL = "https://api.giphy.com/v1";
+const KEY_GIF_LOCAL_STORAGE = "gif1";
 const POST_BASEURL = "https://upload.giphy.com/v1";
 const RESOURCE_NAME_SEARCH = "search";
 const RESOURCE_NAME_TRENDING = "trending";
@@ -7,19 +8,6 @@ const RESOURCE_NAME_RANDOM = "random";
 const RESOURCE_SEARCH_SUGGESTED = "related";
 const RESOURCE_NAME_GIFS = "gifs";
 const RESOURCE_NAME_TAGS = "tags";
-
-/* const LIST_ID_TRENDING_GIFS = "list-trend-gifs";
-const LIST_ID_SUGGESTED_GIFS = "list-suggested-gifs";
-const LIST_ID_SEARCH_GIFS = "list-search-gifs";
-const SECTION_ID_SUGGESTED_GIFS = "suggestedGifSection";
-const SECTION_ID_TREND_GIFS = "trendGifSection";
-const SECTION_ID_SEARCH_GIFS = "searchGifSection";
-const SEARCH_BAR_ID = "search-bar";
-const MY_GUIFOS_CAPTURE_VIDEO_TITLE = "Un Chequeo Antes de Empezar";
-const MY_GUIFOS_RECORD_VIDEO_TITLE = "Capturando Tu Guifo";
-const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
-const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
-const EMPTY_STRING = ""; */
 
 let words = ["cat", "dog", "program", "singer", "love", "music", "friends", "dance", "happy"];
 
@@ -38,11 +26,15 @@ function getEndpointRandomGifs() {
 }
 
 function getEndpointSuggestionsGifs( term ) { 
-    return `${BASEURL}/${RESOURCE_NAME_TAGS}/${RESOURCE_SEARCH_SUGGESTED}/${term}`;
+    return `${BASEURL}/${RESOURCE_NAME_TAGS}/${RESOURCE_SEARCH_SUGGESTED}/${term}?api_key=${APIKEY}`;
 }
 
 function getEndpointPostGifOnGiphy() { 
     return `${POST_BASEURL}/${RESOURCE_NAME_GIFS}?api_key=${APIKEY}`;
+}
+
+function getEndpointMyGuifos( idGif ) { 
+    return `${BASEURL}/${RESOURCE_NAME_GIFS}/${idGif}?api_key=${APIKEY}`;
 }
 
 /*-------Asynchronus functions ----*/ 
@@ -80,15 +72,23 @@ async function fetchSuggestionsGifs( term ) {
 }
 
 async function postGifOnGiphy( gif ) { 
-    let response = await fetch(getEndpointPostGif(), {
+    let response = await fetch(getEndpointPostGifOnGiphy(), {
       method: 'POST',
       body: gif
     });
    return response;
 }
 
+async function fetchMyGuifos( idGif ) { 
+    let response = await fetch(getEndpointMyGuifos( idGif ))
+      .then(response => response.json())
+      .then(responseData => responseData.data); 
+  
+    return response;
+}
 
-/*-------crete gif wrapper -----------*/
+
+/*-------create gif wrapper -----------*/
 
 function getGifWrapper( gif , elementId ) {
     switch (elementId) {
@@ -99,6 +99,9 @@ function getGifWrapper( gif , elementId ) {
             return getGifWrapperImage( gif );
             break;
         case LIST_ID_SEARCH_GIFS:
+            return getGifWrapperImage( gif );
+            break;
+        case LIST_ID_my_GUIFOS:
             return getGifWrapperImage( gif );
             break;
     }
@@ -130,4 +133,33 @@ function getRandomWord() {
    let word = words[Math.floor(Math.random()*words.length)];
 
    return word;
+}
+
+/*---- display elements in DOM functions ----*/
+
+async function displayGifsSectionByElementId( result, elementId ) { 
+    let resultArrayGifs = result;
+    console.log(resultArrayGifs);
+    console.log(elementId);
+    let gifsSectionWrapper = document.getElementById( elementId );
+  
+    gifsSectionWrapper.innerHTML ="";
+  
+    resultArrayGifs.forEach(
+        gif => ( 
+            gifsSectionWrapper.innerHTML += getGifWrapper( gif , elementId )
+        )
+    ); 
+}
+
+/*---- save informtion in Local Storage functions ---*/
+
+function saveDataToLocalStorage( key, value ) {
+    let localStorageKey = key;
+    let localStorageValue = value;
+
+    console.log("localStorageKey", localStorageKey);
+    console.log("localStorageValue", localStorageValue);
+
+    localStorage.setItem(`${localStorageKey}`, `${localStorageValue}`);
 }

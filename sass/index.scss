@@ -1,33 +1,4 @@
-/* SAILOR DAY THEME */
-
-$fontFamilyChakraPetch: 'Chakra Petch';
-
-$fontWeightChakraPetchBold: 700;
-$fontWeightChakraPetchRegular: 400;
-
-$colorFontWhite: #FFFFFF;
-$colorFontBlack: #110038;
-
-$backgroundColorBody: #FFF4FD;
-$backgroundColorTitle: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
-$backgroundColorContent: #E6E6E6;
-$backgroundColorFooterBtn: #F7C9F3;
-
-$boxShadowTopHeader: 0 1px 0 0 #110038;
-$boxShadowContent: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
-$boxShadowFooterBtn: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-
-$borderFooterBtn:  1px solid #110038;
-
-* {
-    border: 0;
-    box-sizing: border-box;
-    margin: 0;
-}
-
-body {
-    background-color: $backgroundColorBody;
-}
+@import "styles.scss";
 
 /*----top-header----*/
 
@@ -111,7 +82,7 @@ body {
     display: none;
     position: absolute;
     top: 251px;
-    width: 1503px;
+    width: 1217px;
     z-index: 1;
     background: $backgroundColorContent;
     box-shadow: $boxShadowContent;

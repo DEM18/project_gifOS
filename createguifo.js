@@ -1,14 +1,8 @@
-const APIKEY = "HA7VTTTjRQ3MypIjMiiIcXq7PAFS6a5O";
-const BASEURL = "https://api.giphy.com/v1/gifs";
 const CLASSNAME_MEDIUM_WRAPPER_MODAL = "medium-wrapper";
 const CLASSNAME_BIG_WRAPPER_MODAL = "big-wrapper";
 const CLASSNAME_SMALL_WRAPPER_MODAL = "small-wrapper";
 const CLASSNAME_DISPLAY_ELEMENT = "show";
 const CLASSNAME_HIDE_ELEMENT = "not-show";
-const POST_BASEURL = "https://upload.giphy.com/v1/gifs";
-const ENDPOINT_SERCH = "search";
-const ENDPOINT_TRENDING = "trending";
-const ENDPOINT_RANDOM = "random";
 const EMPTY_STRING = "";
 const LIST_ID_TRENDING_GIFS = "list-trend-gifs";
 const LIST_ID_SUGGESTED_GIFS = "list-suggested-gifs";
@@ -20,20 +14,6 @@ const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
 const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 const MY_GUIFOS_UPLOADED_GIF_TITLE = "Guifo Subido Con Éxito";
 
-/* MIS GUIFOS SECTION */
-
-function postEndpoint() { //returns string for post endpoint
-  return `${POST_BASEURL}?api_key=JQhP1sBxi7d1SKpBsMlFDJYPGUobpcpK`;
- }
- 
- async function postGif(file) { // fetch API for posting gif
-   let response = await fetch(postEndpoint(), {
-     method: 'POST',
-     body: file
-   });
-  return response;
- }
- 
 
 function configModal( title, classname, content, footer ) {
     let createGuifoModalWrapper = document.getElementById("idCreateGuifoModalWrapper");
@@ -159,14 +139,16 @@ function configModal( title, classname, content, footer ) {
     
     configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
   
-    let postRequestResponse = await postGif(gifRecordedFile)
+    let postRequestResponse = await postGifOnGiphy(gifRecordedFile)
       .then(response => response.json());
+
+    let idGifPost = postRequestResponse.data.id;
+    saveDataToLocalStorage( idGifPost, idGifPost );
 
     document.getElementById("btnTest").addEventListener("click", showUploadedGifOptions);
   
-    console.log(postRequestResponse); 
+    console.log(postRequestResponse);
 
-     //fullProgressiveBar 
   }
 
   function showUploadedGifOptions() {
