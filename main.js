@@ -21,13 +21,12 @@ const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
 const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
 const EMPTY_STRING = ""; */
 
+let words = ["cat", "dog", "program", "singer", "love", "music", "friends", "dance", "happy"];
+
 /*----------getEndpoints functions ---------*/
 
-function getEndpointSearchGifs( keyWord ) { 
-    return `${BASEURL}/${RESOURCE_NAME_GIFS}/${RESOURCE_NAME_SEARCH}?
-        api_key=${APIKEY}&
-        q=${keyWord}
-    `;
+function getEndpointSearchGifs( keyWord, resultsLimit ) { 
+    return `${BASEURL}/${RESOURCE_NAME_GIFS}/${RESOURCE_NAME_SEARCH}?api_key=${APIKEY}&q=${keyWord}&limit=${resultsLimit}`;
 }
 
 function getEndpointTrendingGifs() { 
@@ -48,12 +47,12 @@ function getEndpointPostGifOnGiphy() {
 
 /*-------Asynchronus functions ----*/ 
 
-async function fetchSearchGifs( keyWord ) { 
-    let response = await fetch(getEndpointSearchGifs( keyWord ))
+async function fetchSearchGifs( keyWord, resultsLimit ) { 
+    let response = await fetch(getEndpointSearchGifs( keyWord, resultsLimit ))
       .then(response => response.json())
       .then(responseData => responseData.data); 
   
-    return response;
+      return response;
 }
   
 async function fetchTrendingGifs() { 
@@ -105,23 +104,30 @@ function getGifWrapper( gif , elementId ) {
     }
 }
 
-function getGifWrapperTitleImage( gifTitle, gifImage ) {
+function getGifWrapperTitleImage( gif ) {
     return (`<div class="gif-container bordered">  
           <div class='hashtag-gif-name-wrapper'>
-            <span class='gif-name'>${gifTitle}</span>
+            <span class='gif-name'>${gif.title}</span>
             <img class='btn-close' src='./assets/icons/button3.svg'>	
           </div>
         <div class="gif-image-container">
-          <img class="gif-image" src=${gifImage}>
+          <img class="gif-image" src=${gif.images.fixed_height.url}>
           <button class="btn-see-more">Ver más…</button>
           </div>
     </div>`);
 }
 
-function getGifWrapperImage( gifImage ) {
-    return (`<div class="gif-image-container">
-          <img class="gif-image" src=${gifImage}>
-          <button class="btn-see-more">Ver más…</button>
-          </div>
+function getGifWrapperImage( gif ) {
+    return (`<div class="gif-container bordered">
+            <div class="gif-image-container">
+                <img class="gif-image" src=${gif.images.fixed_height.url}>
+                <button class="btn-see-more">Ver más…</button>
+            </div>
         </div>`);
+}
+
+function getRandomWord() {
+   let word = words[Math.floor(Math.random()*words.length)];
+
+   return word;
 }

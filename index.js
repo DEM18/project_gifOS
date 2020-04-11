@@ -54,13 +54,18 @@ async function fetchSuggestedGifs(endpointURI, term) { // fetch API for gifs
   return response;
 } */
 
-async function displayGifsSectionByElementId( results, elementId ) { 
+async function displayGifsSectionByElementId( result, elementId ) { 
+  
+  let resultArrayGifs = result;
+  let elementClassName = elementId;
+  console.log("resultsArrayGif", resultArrayGifs);
+  console.log("elementClassName", elementClassName);
+  
   let gifsSectionWrapper = document.getElementById( elementId );
-  gifResults = results;
 
   gifsSectionWrapper.innerHTML ="";
 
-  gifResults.forEach(
+  resultArrayGifs.forEach(
       gif => ( 
           gifsSectionWrapper.innerHTML += getGifWrapper( gif , elementId )
       )
@@ -136,4 +141,12 @@ function changeThemeOfPage() {
 }
 
 
-displayGifsSectionByElementId( fetchRandomGifs(), LIST_ID_SUGGESTED_GIFS );
+async function initPage() {
+  let suggestedGifsResults = await fetchSearchGifs(getRandomWord(), 4);
+  let trendingGifsResults = await fetchTrendingGifs();
+  
+  displayGifsSectionByElementId( suggestedGifsResults, LIST_ID_SUGGESTED_GIFS );
+  displayGifsSectionByElementId( trendingGifsResults, LIST_ID_TRENDING_GIFS );
+}
+
+initPage();
