@@ -101,7 +101,7 @@ function getGifWrapper( gif , elementId ) {
         case LIST_ID_SEARCH_GIFS:
             return getGifWrapperImage( gif );
             break;
-        case LIST_ID_my_GUIFOS:
+        case LIST_ID_MIS_GUIFOS:
             return getGifWrapperImage( gif );
             break;
     }

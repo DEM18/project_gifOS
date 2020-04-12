@@ -3,17 +3,41 @@ const CLASSNAME_BIG_WRAPPER_MODAL = "big-wrapper";
 const CLASSNAME_SMALL_WRAPPER_MODAL = "small-wrapper";
 const CLASSNAME_DISPLAY_ELEMENT = "show";
 const CLASSNAME_HIDE_ELEMENT = "not-show";
-const EMPTY_STRING = "";
-const LIST_ID_TRENDING_GIFS = "list-trend-gifs";
-const LIST_ID_SUGGESTED_GIFS = "list-suggested-gifs";
-const SECTION_ID_SUGGESTED_GIFS = "suggestedGifSection";
-const SEARCH_BAR_ID = "search-bar";
-const MY_GUIFOS_CAPTURE_VIDEO_TITLE = "Un Chequeo Antes de Empezar";
-const MY_GUIFOS_RECORD_VIDEO_TITLE = "Capturando Tu Guifo";
-const MY_GUIFOS_PREVIEW_VIEW_TITLE = "Vista Previa";
-const MY_GUIFOS_UPLOAD_GIF_TITLE = "Subiendo Guifo";
+const INIT_I_PROGRESS_BAR = 0;
+const SET_INTERVAL_LIMIT = 1000;
+const PROGRESS_BAR_LIMIT = 2;
+const ID_PREVIEW_VIEW_GIF_WRAPPER = "idPreviewViewGifUploaded";
 const MY_GUIFOS_UPLOADED_GIF_TITLE = "Guifo Subido Con Éxito";
 
+
+let i = INIT_I_PROGRESS_BAR;
+let idSetInterval;
+let objectUrl = "";
+let form = new FormData();
+let gifDone = "";
+
+function displayProgressiveBar() {
+  let progressBarWrapper = document.getElementById("idProgressiveBar");
+
+  progressBarWrapper.innerHTML = "";
+
+ idSetInterval = setInterval(completeProgression, SET_INTERVAL_LIMIT);
+}  
+
+function completeProgression() {
+ 
+  if( i < PROGRESS_BAR_LIMIT ) {
+    let progressBarWrapper = document.getElementById("idProgressiveBar");
+
+    progressBarWrapper.innerHTML += `<div class="progression" id="idProgression"></div>`;
+  
+    i++;
+    console.log(i);
+  } else {
+    i = INIT_I_PROGRESS_BAR;
+    clearInterval(idSetInterval);
+  }
+}
 
 function configModal( title, classname, content, footer ) {
     let createGuifoModalWrapper = document.getElementById("idCreateGuifoModalWrapper");
@@ -68,9 +92,6 @@ function configModal( title, classname, content, footer ) {
   
     let btnStopRecording = document.getElementById("idBtnStopRecordVideo");
     btnStopRecording.addEventListener("click", stopRecord);
-    let form = new FormData();
-    let gifDone;
-    let objectUrl;
   
     navigator.mediaDevices.getUserMedia({
       audio: false,
@@ -91,7 +112,6 @@ function configModal( title, classname, content, footer ) {
         hidden: 240,
         
         onGifRecordingStarted: function() {
-         console.log('started')
        },
       }); 
   
@@ -104,75 +124,88 @@ function configModal( title, classname, content, footer ) {
         objectUrl = this.toURL();
 
         form.append('file', gifDone, 'myGif.gif');
-        console.log(form.get('file'));
 
         
       })
   
       let title = MY_GUIFOS_PREVIEW_VIEW_TITLE;
       let content = `<div><img class='previewViewImage' src='' id='idImagePreviewView'>`;
-      let footer = `<button class='btn one'>Repetir Captura</button><button class='btn two' id='idBtnUploadGif'>Subir Guifo</button>`;
+      let footer = `<button class='btn one' id='idRepeatRecordBtn'>Repetir Captura</button><button class='btn two' id='idBtnUploadGif'>Subir Guifo</button>`;
   
       configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
       setSrcToImageId(objectUrl,"idImagePreviewView");
+
       let btnUploadGif = document.getElementById("idBtnUploadGif");
-      btnUploadGif.addEventListener("click", () => { uploadGif(form) });
-  
+      btnUploadGif.addEventListener("click", () => { uploadGif( objectUrl, form ) });
+
+      document.getElementById("idRepeatRecordBtn").addEventListener("click", captureVideo );
     } 
   }
   
-  function setSrcToImageId(src,imageId){
+  function setSrcToImageId( src, imageId ){
     document.getElementById(imageId).src = src ;
   } 
   
-  async function uploadGif(gif) {
-    let gifRecordedFile = gif;
+  async function uploadGif( gifImage, gif ) {
     let title = MY_GUIFOS_UPLOAD_GIF_TITLE;
     let content = `<div class='uploadGifDetails'><div class='icon-glob-wrapper'><img class='icon-glob' src='./assets/images/globe_img.png'></div>
       <span class='upload-details text-bold'>Estamos subiendo tu guifo…</span>
-      <div class="progressive-bar" id="idProgressiveBar">
-      <div class="progression" id="idProgression"></div>
-      </div>
+      <div class="progressive-bar" id="idProgressiveBar"></div>
       <span class='progress-detail'>Tiempo restante: <span class='text-line-through'>38 años</span> algunos minutos</span>
       </div>`;
-    let footer = `<button class='btn'>Cancelar</button><button class='btn' id='btnTest'>test</button>`;
+    let footer = `<button class='btn' id='idCancelBtn'>Cancelar</button>`;
     
     configModal( title, CLASSNAME_BIG_WRAPPER_MODAL, content, footer );
   
-    let postRequestResponse = await postGifOnGiphy(gifRecordedFile)
+    displayProgressiveBar(); 
+
+    let postRequestResponse = await postGifOnGiphy(gif)
       .then(response => response.json());
 
     let idGifPost = postRequestResponse.data.id;
     saveDataToLocalStorage( idGifPost, idGifPost );
-
-    document.getElementById("btnTest").addEventListener("click", showUploadedGifOptions);
   
-    console.log(postRequestResponse);
+    if( postRequestResponse.data ) {
+      showUploadedGifOptions( gifImage, idGifPost );
+    }
 
+    document.getElementById("idCancelBtn").addEventListener("click", () => { parent.location='index.html' } )
   }
 
-  function showUploadedGifOptions() {
+  async function showUploadedGifOptions( gifImage, idGifPost) {
+    console.log(gifImage);
     let title = MY_GUIFOS_UPLOADED_GIF_TITLE;
     let content = `<div class='uploadedGuifoWrapper'>  
-      <div class='imgUploadedGuifo'><img src=''></div>
+      <div class='imgUploadedGuifo'><img src='' id='idPreviewViewGifUploaded'></div>
       <div class='optionsWrapper'>
       <span class='uploadStatusDetail'>Guifo creado con éxito</span>
-      <button class='btn option one option1'>Copiar Enlace Guifo</button>
-      <button class='btn option one option2'>Descargar Guifo</button>
+      <button class='btn option one option1' id='idCopyLinkBtn'>Copiar Enlace Guifo</button>
+      <a class='btn option one option2' href='' id='idAnchorBtnDownload' download>Descargar Guifo</a>
       </div>
     </div>`;
-    let footer = `<button class='btn'>Listo</button>`;
+    let footer = `<button class='btn' id='idReadyBtn'>Listo</button>`;
 
     configModal( title, CLASSNAME_SMALL_WRAPPER_MODAL, content, footer);
+
+    setSrcToImageId( gifImage, ID_PREVIEW_VIEW_GIF_WRAPPER );
+
+    let fetchPostGifResults = await fetchMyGuifos( idGifPost );
+    
+    let gifImageUrl = document.getElementById("idAnchorBtnDownload").href = fetchPostGifResults.images.fixed_height.url;
+    document.getElementById("idCopyLinkBtn").addEventListener("click", () => { copyTextToClipboard(gifImageUrl) });
+    document.getElementById("idReadyBtn").addEventListener("click", () => { parent.location='index.html' } );
+
+    document.getElementById("idMisGuifosSection").classList.toggle("not-show");
+    
+
+    initMyGuifosPage();
+    
   }
- 
-  /*function fullProgressiveBar() {
-     let progressiveBar = document.getElementById("idProgressiveBar"); 
-    let progression = document.getElementById("idProgression");
-    let progressionWidth = progression.clientWidth;
 
-    progressionWidth + 15;
-    progression.style.width = progressionWidth;
-  } */
+  function copyTextToClipboard( text ) {
+    document.execCommand( text );
+    alert(`Guifo link copied to Clipboard`);
+  }
 
-  
+
+initMyGuifosPage();

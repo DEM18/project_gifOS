@@ -1,5 +1,6 @@
 @import "styles.scss";
 @import "index.scss";
+@import "misguifos.scss";
 
 /*---Modal configuration---*/
 
@@ -295,16 +296,16 @@
 .progressive-bar {
     width: 324px;
     height: 24px;
-    margin-top: 39px;
     margin-bottom: 8px;
-    background-color: #999999;;
+    background-color: #999999;
+    box-shadow: inset 2px 2px 0 0 #FFFCFC, inset -2px -2px 0 0 #000000;
     display: flex;
     align-items: center;
 }
 
 .progression {
     width: 15px;
-    height: 24px;
+    height: 26px;
     background-color: #F7C9F3;;
     border: 1px solid $colorFontWhite;
 }
@@ -333,7 +334,6 @@
 .imgUploadedGuifo {
     width: 365px;
     height: 191px;
-    background-color:azure;
     margin-top: 27px;
     margin-right: 24px;
 }
@@ -361,5 +361,12 @@
 
 .btn.option.one.option1 {
     margin-bottom: 14px;
+}
+ 
+.btn.option.one.option2 {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
